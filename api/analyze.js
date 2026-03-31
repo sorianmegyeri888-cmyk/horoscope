@@ -11,7 +11,7 @@ module.exports = (req, res) => {
   const https = require('https');
   const body = JSON.stringify({
     model: 'gpt-4o-mini',
-    max_tokens: 4000,
+    max_tokens: 6000,
     response_format: { type: 'json_object' },
     messages: [
       { role: 'system', content: 'Te egy kinai asztrológus vagy Theodora Lau rendszere alapjan. Mindig valid JSON-t adsz vissza. Mas szöveg nélkül.' },
