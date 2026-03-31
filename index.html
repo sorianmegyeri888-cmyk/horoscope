@@ -174,6 +174,15 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
   <p><strong>Ő az, akivel össze kellett találkoznod… vagy akit el kellett volna kerülnöd?</strong> Theodora Lau 5000 éves rendszere megmutatja — az év, hónap, nap és óra alapján.</p>
 </div>
 
+<!-- DISCLAIMER -->
+<div style="text-align:center;margin-bottom:24px;padding:12px 20px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);border-radius:4px">
+  <p style="font-size:12px;color:rgba(250,243,224,.5);font-style:italic;line-height:1.7">
+    ✨ <strong style="color:rgba(201,168,76,.7);font-style:normal">Szórakoztató tartalom</strong> — Ez az oldal asztrológiai hagyományokon alapuló, szórakoztató elemzést nyújt. 
+    Nem helyettesít szakmai tanácsadást. Az elemzések pontossága függ a megadott adatok teljességétől — 
+    ha nem ismered a pontos születési órát, az eredmény csak tájékoztató jellegű. Vedd játékosan! 🐉
+  </p>
+</div>
+
 <!-- ANIMAL GRID -->
 <div class="sec-label">
   <span class="sec-label-zh">十二生肖</span>
@@ -586,7 +595,7 @@ async function getAnalysis(type) {
     parsed.sections.forEach(sec=>{
       html+='<div class="ar-sec"><div class="ar-sec-head"><span class="ar-sec-icon">'+sec.icon+'</span><span class="ar-sec-title">'+sec.title+'</span></div><div class="ar-sec-body">'+sec.body.replace(/\n/g,'<br>')+'</div></div>';
     });
-    html+='<div class="ar-footer">Theodora Lau · The Handbook of Chinese Horoscopes · GPT-4o-mini elemzés</div>';
+    html+='<div class="ar-footer">Theodora Lau · The Handbook of Chinese Horoscopes · GPT-4o-mini elemzés</div><div style="text-align:center;margin-top:8px;font-size:11px;color:rgba(250,243,224,.3);font-style:italic">✨ Szórakoztató célú elemzés — hiányos adatok esetén csak tájékoztató jellegű. Vedd játékosan!</div>';
     el.innerHTML=html;
     el.scrollIntoView({behavior:'smooth',block:'start'});
     showPdfBtn();
@@ -727,4 +736,3 @@ if(!localStorage.getItem('cookies-accepted')) {
 </script>
 </body>
 </html>
-
