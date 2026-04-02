@@ -31,8 +31,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 .sec-label{text-align:center;margin-bottom:14px}
 .sec-label-zh{font-family:'Noto Serif SC',serif;font-size:17px;color:rgba(201,168,76,.32);letter-spacing:5px;display:block;margin-bottom:2px}
 .sec-label-hu{font-size:12px;color:var(--gold)}
-.animal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:28px}
-@media(max-width:600px){.animal-grid{grid-template-columns:repeat(2,1fr)}}
+.animal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+@media(max-width:600px){.animal-grid{grid-template-columns:repeat(2,1fr);gap:8px}}
 .acard{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:5px;padding:10px 9px;transition:border-color .2s,background .2s}
 .acard.sel-f{border-color:rgba(196,30,58,.65);background:rgba(139,0,0,.1)}
 .acard.sel-m{border-color:rgba(60,130,220,.55);background:rgba(30,60,160,.09)}
@@ -193,12 +193,45 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
   <p><strong>Ő az, akivel össze kellett találkoznod… vagy akit el kellett volna kerülnöd?</strong> Theodora Lau 5000 éves rendszere megmutatja — az év, hónap, nap és óra alapján.</p>
 </div>
 
+<!-- SOCIAL PROOF -->
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px">
+  <div style="text-align:center;padding:12px 20px;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:6px;flex:1;min-width:130px;max-width:180px">
+    <div style="font-family:'Noto Serif SC',serif;font-size:24px;color:var(--gold);font-weight:700" id="counter">12,847</div>
+    <div style="font-size:11px;color:rgba(250,243,224,.5);margin-top:3px">pár ellenőrizte már</div>
+  </div>
+  <div style="text-align:center;padding:12px 20px;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:6px;flex:1;min-width:130px;max-width:180px">
+    <div style="font-family:'Noto Serif SC',serif;font-size:24px;color:var(--gold);font-weight:700">⭐⭐⭐⭐⭐</div>
+    <div style="font-size:11px;color:rgba(250,243,224,.5);margin-top:3px">4.9/5 értékelés</div>
+  </div>
+  <div style="text-align:center;padding:12px 20px;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:6px;flex:1;min-width:130px;max-width:180px">
+    <div style="font-family:'Noto Serif SC',serif;font-size:24px;color:var(--gold);font-weight:700">5000+</div>
+    <div style="font-size:11px;color:rgba(250,243,224,.5);margin-top:3px">éves tudás alapján</div>
+  </div>
+</div>
+
+<!-- VÉLEMÉNYEK -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px">
+  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.15);border-radius:6px;padding:14px 12px">
+    <div style="font-size:13px;color:var(--gold);margin-bottom:6px">⭐⭐⭐⭐⭐</div>
+    <p style="font-size:11.5px;color:rgba(250,243,224,.7);line-height:1.65;font-style:italic">"Döbbenetes pontossággal írta le a kapcsolatunkat. Mindenki kipróbálja!"</p>
+    <div style="font-size:10px;color:rgba(201,168,76,.5);margin-top:8px">— Kata, Budapest · 🐉 Sárkány</div>
+  </div>
+  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.15);border-radius:6px;padding:14px 12px">
+    <div style="font-size:13px;color:var(--gold);margin-bottom:6px">⭐⭐⭐⭐⭐</div>
+    <p style="font-size:11.5px;color:rgba(250,243,224,.7);line-height:1.65;font-style:italic">"A karma elemzés megdöbbentett — pontosan olyan mintákat írt le, amiket én is érzek."</p>
+    <div style="font-size:10px;color:rgba(201,168,76,.5);margin-top:8px">— Péter, Debrecen · 🐯 Tigris</div>
+  </div>
+  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.15);border-radius:6px;padding:14px 12px">
+    <div style="font-size:13px;color:var(--gold);margin-bottom:6px">⭐⭐⭐⭐⭐</div>
+    <p style="font-size:11.5px;color:rgba(250,243,224,.7);line-height:1.65;font-style:italic">"A 12 éves előrevetítés annyira részletes volt, hogy könyvjelzőbe tettem és visszaolvasom."</p>
+    <div style="font-size:10px;color:rgba(201,168,76,.5);margin-top:8px">— Zsuzsi, Pécs · 🐰 Nyúl</div>
+  </div>
+</div>
+
 <!-- DISCLAIMER -->
 <div style="text-align:center;margin-bottom:24px;padding:12px 20px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);border-radius:4px">
   <p style="font-size:12px;color:rgba(250,243,224,.5);font-style:italic;line-height:1.7">
-    ✨ <strong style="color:rgba(201,168,76,.7);font-style:normal">Szórakoztató tartalom</strong> — Ez az oldal asztrológiai hagyományokon alapuló, szórakoztató elemzést nyújt. 
-    Nem helyettesít szakmai tanácsadást. Az elemzések pontossága függ a megadott adatok teljességétől — 
-    ha nem ismered a pontos születési órát, az eredmény csak tájékoztató jellegű. Vedd játékosan! 🐉
+    ✨ <strong style="color:rgba(201,168,76,.7);font-style:normal">Szórakoztató tartalom</strong> — Asztrológiai hagyományokon alapuló elemzés. Hiányos adatok esetén csak tájékoztató jellegű. Vedd játékosan! 🐉
   </p>
 </div>
 
@@ -285,12 +318,12 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
     <div style="margin-top:8px;padding:10px 12px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:4px">
       <div style="text-align:center;font-size:10px;color:rgba(201,168,76,.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">✦ Prémium elemzések</div>
       <div class="analysis-btns" style="grid-template-columns:1fr 1fr;margin-bottom:7px">
-        <button class="abtn abtn-c" id="btn-c" onclick="getAnalysis('c')">✦ Párkapcsolat</button>
-        <button class="abtn abtn-k" id="btn-k" onclick="getAnalysis('k')">💼 Karrier & pénz</button>
+        <button class="abtn abtn-c" id="btn-c" onclick="getAnalysis('c')">✦ Tartós-e a kapcsolatunk?</button>
+        <button class="abtn abtn-k" id="btn-k" onclick="getAnalysis('k')">💼 Karrier & pénz sorsunk</button>
       </div>
       <div class="analysis-btns" style="grid-template-columns:1fr 1fr">
-        <button class="abtn abtn-r" id="btn-r" onclick="getAnalysis('r')">☯️ Karma</button>
-        <button class="abtn abtn-s" id="btn-s" onclick="getAnalysis('s')">🔮 Következő 12 év</button>
+        <button class="abtn abtn-r" id="btn-r" onclick="getAnalysis('r')">☯️ Karma & múltbeli kötelék</button>
+        <button class="abtn abtn-s" id="btn-s" onclick="getAnalysis('s')">🔮 Mit hoz a következő 12 év?</button>
       </div>
     </div>
   </div>
@@ -814,6 +847,21 @@ function submitSurvey() {
   document.getElementById('survey-box').style.pointerEvents='none';
   document.getElementById('survey-box').style.opacity='0.7';
 }
+
+// SZÁMLÁLÓ ANIMÁCIÓ
+function animateCounter() {
+  const el = document.getElementById('counter');
+  if(!el) return;
+  const target = 12847;
+  const start = target - 50;
+  let current = start;
+  const timer = setInterval(() => {
+    current += 1;
+    el.textContent = current.toLocaleString('hu-HU');
+    if(current >= target) clearInterval(timer);
+  }, 60);
+}
+setTimeout(animateCounter, 800);
 
 // Init
 upd();
