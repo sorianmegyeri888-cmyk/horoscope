@@ -8,52 +8,52 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--red:#C41E3A;--red-dark:#5C0000;--gold:#C9A84C;--gold-l:#E8C97A;--cream:#FAF3E0;--ink:#0d0a2e}
+:root{--red:#C41E3A;--red-dark:#5C0000;--gold:#D4B85C;--gold-l:#F0D98A;--cream:#FAF3E0;--ink:#1e1b4b}
 body{background:var(--ink);color:var(--cream);font-family:'Libre Baskerville',Georgia,serif;min-height:100vh;padding:36px 20px 80px;font-size:15px}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 15% 85%,rgba(139,0,0,.18) 0%,transparent 50%),radial-gradient(circle at 85% 15%,rgba(100,80,200,.1) 0%,transparent 50%);pointer-events:none;z-index:0}
-.border-frame{position:fixed;inset:10px;border:1px solid rgba(201,168,76,.22);pointer-events:none;z-index:100}
+.border-frame{position:fixed;inset:10px;border:1px solid rgba(201,168,76,.48);pointer-events:none;z-index:100}
 .wrap{max-width:680px;margin:0 auto;position:relative;z-index:1}
 .hero{text-align:center;margin-bottom:22px}
 .hero-zh{font-family:'Noto Serif SC',serif;font-size:clamp(50px,9vw,86px);color:var(--red);letter-spacing:10px;line-height:1;text-shadow:0 0 36px rgba(196,30,58,.3);display:block;margin-bottom:6px}
 .hero-line{width:140px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:8px auto 12px}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(14px,2.4vw,20px);color:var(--gold-l);font-weight:400;line-height:1.5;margin-bottom:6px}
-.hero p{font-size:12px;color:rgba(250,243,224,.4);font-style:italic;max-width:380px;margin:0 auto}
+.hero p{font-size:12px;color:rgba(250,243,224,.75);font-style:italic;max-width:380px;margin:0 auto}
 .mode-btns{display:flex;gap:12px;justify-content:center;margin-bottom:22px}
 .mode-btn{flex:1;max-width:200px;text-align:center;padding:14px 10px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:4px;text-decoration:none;display:block}
 .mode-active{background:linear-gradient(135deg,#1a0a4e,#3a1a8e);color:var(--gold-l);box-shadow:0 4px 18px rgba(80,40,180,.3);border:1px solid rgba(150,120,220,.5)}
-.mode-inactive{background:rgba(255,255,255,.05);color:rgba(250,243,224,.6);border:1px solid rgba(201,168,76,.25)}
+.mode-inactive{background:rgba(255,255,255,.1);color:rgba(250,243,224,.6);border:1px solid rgba(201,168,76,.75)}
 .hook{background:linear-gradient(135deg,rgba(80,40,180,.3),rgba(40,20,100,.4));border:1px solid rgba(150,120,220,.4);border-radius:4px;padding:14px 28px;text-align:center;margin-bottom:22px}
 .hook p{font-family:'Playfair Display',serif;font-size:clamp(12px,1.8vw,14px);color:var(--gold-l);font-style:italic;line-height:1.65}
 .hook strong{color:#fff;font-style:normal}
 .animal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
 @media(max-width:600px){.animal-grid{grid-template-columns:repeat(2,1fr)}}
-.acard{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:5px;padding:9px 8px;transition:border-color .2s}
+.acard{background:rgba(255,255,255,.09);border:1px solid rgba(201,168,76,.7);border-radius:5px;padding:9px 8px;transition:border-color .2s}
 .acard.sel{border-color:rgba(150,120,220,.8);background:rgba(80,40,180,.15)}
 .acard-em{font-size:28px;text-align:center;display:block;margin-bottom:3px;line-height:1}
 .acard-zh{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--red);text-align:center;display:block;margin-bottom:1px}
 .acard-name{font-size:11px;color:var(--gold-l);font-weight:700;text-align:center;display:block;margin-bottom:3px}
 .acard-desc{font-size:11px;color:rgba(250,243,224,.45);line-height:1.6}
-.form-box{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:24px 20px 20px;margin-bottom:0}
+.form-box{background:rgba(255,255,255,.09);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:24px 20px 20px;margin-bottom:0}
 .form-title{text-align:center;font-family:'Playfair Display',serif;font-size:14px;color:var(--gold-l);margin-bottom:18px}
 .fg{margin-bottom:9px}
 .fl{display:block;font-size:11px;color:rgba(201,168,76,.9);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:5px}
-.fi{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(201,168,76,.5);border-radius:4px;padding:11px 12px;color:#FAF3E0;font-family:'Libre Baskerville',serif;font-size:15px;outline:none;-webkit-appearance:none;appearance:none;transition:border-color .18s}
+.fi{width:100%;background:rgba(255,255,255,.14);border:1px solid rgba(201,168,76,.75);border-radius:4px;padding:11px 12px;color:#FAF3E0;font-family:'Libre Baskerville',serif;font-size:15px;outline:none;-webkit-appearance:none;appearance:none;transition:border-color .18s}
 .fi:focus{border-color:rgba(201,168,76,.9);background:rgba(255,255,255,.12)}
-.fi::placeholder{color:rgba(250,243,224,.4)}
+.fi::placeholder{color:rgba(250,243,224,.75)}
 select.fi option{background:#1a1545;color:#FAF3E0}
 .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:9px}
 @media(max-width:480px){.row3{grid-template-columns:1fr 1fr}.row3 div:last-child{grid-column:1/-1}}
-.preview{margin-top:10px;padding:8px 10px;background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.3);border-radius:3px;font-size:12px;color:var(--gold-l);min-height:34px}
+.preview{margin-top:10px;padding:8px 10px;background:rgba(255,255,255,.11);border:1px solid rgba(201,168,76,.3);border-radius:3px;font-size:12px;color:var(--gold-l);min-height:34px}
 .calc-btn{display:block;width:100%;max-width:280px;margin:18px auto 0;background:linear-gradient(135deg,#1a0a4e,#3a1a8e);color:var(--gold-l);font-family:'Playfair Display',serif;font-size:14px;font-weight:700;letter-spacing:1px;padding:14px 36px;border:1px solid rgba(150,120,220,.5);border-radius:3px;cursor:pointer;box-shadow:0 4px 22px rgba(80,40,180,.3)}
 .calc-btn:hover{opacity:.9}
 .error-msg{margin-top:9px;color:#F5A0A0;font-size:12px;text-align:center}
 #result{display:none;margin-top:22px}
-.score-card{background:rgba(255,255,255,.05);border:1px solid rgba(150,120,220,.35);border-radius:6px 6px 0 0;padding:20px 18px;text-align:center}
-.analysis-panel{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.25);border-top:none;padding:12px 14px;border-radius:0 0 6px 6px}
+.score-card{background:rgba(255,255,255,.1);border:1px solid rgba(150,120,220,.35);border-radius:6px 6px 0 0;padding:20px 18px;text-align:center}
+.analysis-panel{background:rgba(255,255,255,.09);border:1px solid rgba(201,168,76,.75);border-top:none;padding:12px 14px;border-radius:0 0 6px 6px}
 .analysis-btns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px}
-.abtn{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;padding:13px 8px;border-radius:4px;cursor:pointer;border:1px solid rgba(201,168,76,.25);background:transparent;transition:all .18s;color:var(--gold-l)}
-.abtn:hover{background:rgba(255,255,255,.04)}
-.abtn.active{background:rgba(255,255,255,.05)}
+.abtn{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;padding:13px 8px;border-radius:4px;cursor:pointer;border:1px solid rgba(201,168,76,.75);background:transparent;transition:all .18s;color:var(--gold-l)}
+.abtn:hover{background:rgba(255,255,255,.09)}
+.abtn.active{background:rgba(255,255,255,.1)}
 .abtn-p{color:#F5A0A0}.abtn-p.active{border-color:#F5A0A0}
 .abtn-k{color:#a8d8a8}.abtn-k.active{border-color:#a8d8a8}
 .abtn-r{color:#c8a8e8}.abtn-r.active{border-color:#c8a8e8}
@@ -65,31 +65,31 @@ select.fi option{background:#1a1545;color:#FAF3E0}
 .ar-r{background:rgba(80,30,120,.12);border:1px solid rgba(150,100,200,.35)}
 .ar-s{background:rgba(20,60,100,.12);border:1px solid rgba(80,140,200,.35)}
 .ar-w{background:rgba(100,70,20,.12);border:1px solid rgba(201,168,76,.35)}
-.ar-sec{background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:12px 14px;margin-bottom:8px}
+.ar-sec{background:rgba(255,255,255,.1);border:1px solid rgba(201,168,76,.7);border-radius:4px;padding:12px 14px;margin-bottom:8px}
 .ar-sec-head{display:flex;gap:8px;align-items:center;margin-bottom:7px}
 .ar-sec-icon{font-size:18px;color:var(--red)}
 .ar-sec-title{font-size:14px;color:var(--gold-l);font-weight:700}
 .ar-sec-body{font-size:14px;line-height:1.9;color:rgba(250,243,224,.82)}
 .ar-footer{text-align:center;margin-top:8px;font-size:10px;color:rgba(250,243,224,.2);font-style:italic}
 .progress-wrap{padding:20px 0 14px}
-.progress-msg{text-align:center;font-size:12.5px;color:rgba(250,243,224,.55);margin-bottom:12px}
-.progress-bar-bg{background:rgba(201,168,76,.12);border-radius:6px;height:10px;overflow:hidden;margin-bottom:7px}
+.progress-msg{text-align:center;font-size:12.5px;color:rgba(250,243,224,.9);margin-bottom:12px}
+.progress-bar-bg{background:rgba(201,168,76,.4);border-radius:6px;height:10px;overflow:hidden;margin-bottom:7px}
 .progress-bar-fill{height:100%;border-radius:6px;transition:width .4s ease}
 .progress-row{display:flex;justify-content:space-between;align-items:center}
-.progress-hint{font-size:11px;color:rgba(250,243,224,.38);font-style:italic}
+.progress-hint{font-size:11px;color:rgba(250,243,224,.92);font-style:italic}
 .progress-pct{font-size:13px;color:var(--gold-l);font-weight:700}
-.pdf-btn{display:block;width:100%;max-width:280px;margin:14px auto 0;background:transparent;color:var(--gold-l);font-family:'Playfair Display',serif;font-size:13px;font-weight:700;letter-spacing:1px;padding:11px 24px;border:1px solid rgba(201,168,76,.45);border-radius:3px;cursor:pointer;transition:all .18s}
+.pdf-btn{display:block;width:100%;max-width:280px;margin:14px auto 0;background:transparent;color:var(--gold-l);font-family:'Playfair Display',serif;font-size:13px;font-weight:700;letter-spacing:1px;padding:11px 24px;border:1px solid rgba(201,168,76,.7);border-radius:3px;cursor:pointer;transition:all .18s}
 .pdf-btn:hover{background:rgba(201,168,76,.08)}
-.compat-card{background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.25);border-radius:4px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+.compat-card{background:rgba(255,255,255,.1);border:1px solid rgba(201,168,76,.75);border-radius:4px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px}
 .compat-rank{font-size:22px;color:var(--gold);font-weight:700;min-width:30px;text-align:center}
 .compat-em{font-size:26px}
 .compat-info{flex:1}
 .compat-name{font-size:13px;color:var(--gold-l);font-weight:700}
-.compat-score{font-size:11px;color:rgba(250,243,224,.5);margin-top:2px}
+.compat-score{font-size:11px;color:rgba(250,243,224,.85);margin-top:2px}
 .compat-bar{height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:5px;overflow:hidden}
 .compat-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#9A7A2A,var(--gold-l))}
 footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid rgba(201,168,76,.08)}
-.footer-zh{font-family:'Noto Serif SC',serif;font-size:16px;color:rgba(201,168,76,.2);letter-spacing:6px;display:block;margin-bottom:4px}
+.footer-zh{font-family:'Noto Serif SC',serif;font-size:16px;color:rgba(201,168,76,.45);letter-spacing:6px;display:block;margin-bottom:4px}
 .footer-copy{font-size:10px;color:rgba(250,243,224,.12)}
 @media(max-width:600px){
   body{padding:24px 14px 70px;font-size:14px}
@@ -141,22 +141,84 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
   <p><strong>Ki vagy te valójában?</strong> Az állatjegyed, az elemed és az órajegyed együttesen rajzolják ki egyéni sorsodat — karrieredet, karmádat és a hozzád illő párt.</p>
 </div>
 
-<div style="text-align:center;margin-bottom:22px;padding:10px 18px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);border-radius:4px">
-  <p style="font-size:12px;color:rgba(250,243,224,.5);font-style:italic;line-height:1.7">✨ <strong style="color:rgba(201,168,76,.7);font-style:normal">Szórakoztató tartalom</strong> — Asztrológiai hagyományokon alapuló, szórakoztató elemzés. Hiányos adatok esetén csak tájékoztató jellegű. Vedd játékosan! 🐉</p>
+<div style="text-align:center;margin-bottom:22px;padding:10px 18px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.4);border-radius:4px">
+  <p style="font-size:12px;color:rgba(250,243,224,.85);font-style:italic;line-height:1.7">✨ <strong style="color:rgba(201,168,76,.7);font-style:normal">Szórakoztató tartalom</strong> — Asztrológiai hagyományokon alapuló, szórakoztató elemzés. Hiányos adatok esetén csak tájékoztató jellegű. Vedd játékosan! 🐉</p>
 </div>
 
-<div class="sec-label" style="text-align:center;margin-bottom:14px">
-  <span style="font-family:'Noto Serif SC',serif;font-size:17px;color:rgba(201,168,76,.32);letter-spacing:5px;display:block;margin-bottom:2px">十二生肖</span>
-  <span style="font-size:12px;color:var(--gold)">A 12 kínai állatjegy</span>
+<!-- ÁLLATJEGY KERÉK -->
+<div style="position:relative;width:100%;max-width:520px;margin:0 auto 28px;padding:8px 0">
+  <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg" id="zodiac-wheel" style="display:block;width:100%;height:auto"></svg>
+  <div id="zodiac-popup" style="display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#2a2468;border:1.5px solid #C9A84C;border-radius:12px;padding:18px 22px;width:220px;z-index:10;text-align:center">
+    <button onclick="closeZodiac()" style="position:absolute;top:8px;right:10px;background:none;border:none;color:rgba(201,168,76,.6);font-size:18px;cursor:pointer;line-height:1">✕</button>
+    <span id="zp-em" style="font-size:42px;display:block;margin-bottom:6px;line-height:1"></span>
+    <span id="zp-zh" style="font-family:serif;font-size:26px;color:#C41E3A;display:block;margin-bottom:2px"></span>
+    <span id="zp-name" style="font-size:17px;color:#E8C97A;font-weight:700;display:block;margin-bottom:3px"></span>
+    <span id="zp-el" style="font-size:12px;color:rgba(232,201,122,.6);display:block;margin-bottom:10px"></span>
+    <p id="zp-desc" style="font-size:13px;color:rgba(250,243,224,.75);line-height:1.7;text-align:left"></p>
+  </div>
+  <div style="text-align:center;font-size:12px;color:rgba(201,168,76,.45);font-style:italic;margin-top:4px">Kattints egy szektorra a leíráshoz</div>
 </div>
-<div class="animal-grid" id="agrid"></div>
+<script>
+(function(){
+var ZA=[
+  {n:"Patkány",zh:"鼠",em:"🐀",el:"Víz",color:"#2a5a9e",border:"#6a9ad5",desc:"Okos, leleményes és karizmatikus. Mindig megtalálja az utat. Éles megfigyelő — pontosan érzékeli mások szándékait. Valódi érzéseit csak kevesek előtt tárja fel."},
+  {n:"Bika",zh:"牛",em:"🐂",el:"Föld",color:"#3a6a2a",border:"#7ab85a",desc:"Megbízható, türelmes és rendíthetetlen. Ha belefog valamibe, végigcsinálja. Stabilitása másokban mély bizalmat ébreszt — erre a jegyre mindig lehet számítani."},
+  {n:"Tigris",zh:"虎",em:"🐅",el:"Fa",color:"#7a4a1a",border:"#c08040",desc:"Bátor, szenvedélyes, természetes tekintéllyel rendelkezik. Nemes szívű és igazságszerető — impulzív döntései sokszor zseniálisak."},
+  {n:"Nyúl",zh:"兔",em:"🐇",el:"Fa",color:"#5a2a7a",border:"#aa6aba",desc:"Finom, érzékeny és diplomatikus. Kivételesen fogékony mások érzelmeire. Esztétikai érzéke párját ritkítja — szépséget lát ott, ahol mások nem."},
+  {n:"Sárkány",zh:"龍",em:"🐉",el:"Föld",color:"#8a1a1a",border:"#d04040",desc:"A legszerencsésebb jegy! Ragyogó karizma és határtalan energia — arra született, hogy vezessen. Az egyetlen mitikus állat a 12 jegy között."},
+  {n:"Kígyó",zh:"蛇",em:"🐍",el:"Tűz",color:"#1a5a5a",border:"#4aaaa0",desc:"Bölcs, mély és intuitív. Pontosan érzékeli mások motivációit. Csendes megfigyelő — belső gazdagsága végtelen, de csak kevesek előtt tárja fel."},
+  {n:"Ló",zh:"馬",em:"🐎",el:"Tűz",color:"#6a3a1a",border:"#ba6a3a",desc:"Szabad, energikus és optimista. Végtelen energiával rendelkezik — egyetlen dolog fojtogatja: a bezártság. A kaland az otthona."},
+  {n:"Kecske",zh:"羊",em:"🐐",el:"Föld",color:"#2a4a7a",border:"#5a7aba",desc:"Alkotó, empatikus és érzékeny. Mélyen átérzi mások fájdalmát és örömét. Természetes művészlélek — szépséget lát ott, ahol mások nem."},
+  {n:"Majom",zh:"猴",em:"🐒",el:"Fém",color:"#3a5a2a",border:"#7a9a5a",desc:"Szellemes, sokoldalú és leleményes. Villámgyorsan gondolkodik — komoly célokat követ a vidám külső mögött."},
+  {n:"Kakas",zh:"雞",em:"🐓",el:"Fém",color:"#6a5a1a",border:"#ba9a3a",desc:"Precíz, becsületes és önbizalmas. Perfekcionista természete miatt mindig a részletekre figyel. Egyenes szókimondó — amit gondol, kimondja."},
+  {n:"Kutya",zh:"狗",em:"🐕",el:"Föld",color:"#4a2a6a",border:"#8a5aaa",desc:"Hűséges, igazságos és védelmező. Soha nem árulja el elveit — feltétel nélkül számítani lehet rá. A leghűségesebb szövetséges."},
+  {n:"Disznó",zh:"豬",em:"🐷",el:"Víz",color:"#2a4a6a",border:"#5a8aaa",desc:"Nagylelkű, derűs és becsületes. Nyílt szívű optimizmussal közelít az élethez — igazi boldogsága mások boldogításában rejlik."},
+];
+var svg=document.getElementById('zodiac-wheel');
+var cx=260,cy=260,outerR=252,innerR=94;
+var step=Math.PI*2/12;
+var start=-Math.PI/2;
+function pt(r,a){return[cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+function mkEl(tag,attrs){var el=document.createElementNS('http://www.w3.org/2000/svg',tag);for(var k in attrs)el.setAttribute(k,attrs[k]);return el;}
+svg.appendChild(mkEl('circle',{cx:cx,cy:cy,r:255,fill:'#1e1b4b',stroke:'#C9A84C','stroke-width':'1.5'}));
+svg.appendChild(mkEl('circle',{cx:cx,cy:cy,r:90,fill:'#2a2468',stroke:'#C9A84C','stroke-width':'1.5'}));
+var ct=mkEl('text',{x:cx,y:cy-12,'text-anchor':'middle','font-family':'serif','font-size':'28',fill:'#C41E3A'});ct.textContent='龍 鳳';svg.appendChild(ct);
+var ct2=mkEl('text',{x:cx,y:cy+14,'text-anchor':'middle','font-family':'serif','font-size':'11',fill:'rgba(201,168,76,.6)','letter-spacing':'2'});ct2.textContent='緣';svg.appendChild(ct2);
+ZA.forEach(function(a,i){
+  var a1=start+i*step,a2=a1+step,mid=(a1+a2)/2;
+  var p1o=pt(outerR,a1),p2o=pt(outerR,a2),p1i=pt(innerR,a1),p2i=pt(innerR,a2);
+  var d='M '+p1i[0]+' '+p1i[1]+' L '+p1o[0]+' '+p1o[1]+' A '+outerR+' '+outerR+' 0 0 1 '+p2o[0]+' '+p2o[1]+' L '+p2i[0]+' '+p2i[1]+' A '+innerR+' '+innerR+' 0 0 0 '+p1i[0]+' '+p1i[1]+' Z';
+  var path=mkEl('path',{d:d,fill:a.color,stroke:a.border,'stroke-width':'1.2',cursor:'pointer'});
+  path.addEventListener('click',function(){showZ(i);});
+  path.addEventListener('mouseenter',function(){this.style.opacity='0.7';});
+  path.addEventListener('mouseleave',function(){this.style.opacity='1';});
+  svg.appendChild(path);
+  var lr=(outerR+innerR)/2+6,lp=pt(lr,mid);
+  var eg=mkEl('g',{cursor:'pointer',style:'pointer-events:none'});
+  var et=mkEl('text',{x:lp[0],y:lp[1]-12,'text-anchor':'middle','dominant-baseline':'middle','font-size':'18'});et.textContent=a.em;eg.appendChild(et);
+  var zt=mkEl('text',{x:lp[0],y:lp[1]+6,'text-anchor':'middle','dominant-baseline':'middle','font-family':'serif','font-size':'14',fill:'#C41E3A'});zt.textContent=a.zh;eg.appendChild(zt);
+  var nt=mkEl('text',{x:lp[0],y:lp[1]+22,'text-anchor':'middle','dominant-baseline':'middle','font-size':'10',fill:'#E8C97A'});nt.textContent=a.n;eg.appendChild(nt);
+  svg.appendChild(eg);
+});
+function showZ(i){
+  var a=ZA[i];
+  document.getElementById('zp-em').textContent=a.em;
+  document.getElementById('zp-zh').textContent=a.zh;
+  document.getElementById('zp-name').textContent=a.n;
+  document.getElementById('zp-el').textContent=a.el+' elem';
+  document.getElementById('zp-desc').textContent=a.desc;
+  document.getElementById('zodiac-popup').style.display='block';
+}
+window.closeZodiac=function(){document.getElementById('zodiac-popup').style.display='none';}
+})();
+</script>
 
 <div class="form-box">
   <div class="form-title">Add meg a születési adataidat</div>
 
   <div style="display:flex;gap:12px;justify-content:center;margin-bottom:18px">
     <button onclick="setGender('f')" id="gender-f" style="flex:1;max-width:140px;padding:10px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:3px;cursor:pointer;background:rgba(180,30,80,.2);border:1px solid rgba(196,30,58,.5);color:#F5A0A0">♀ Nő</button>
-    <button onclick="setGender('m')" id="gender-m" style="flex:1;max-width:140px;padding:10px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:3px;cursor:pointer;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.25);color:rgba(250,243,224,.5)">♂ Férfi</button>
+    <button onclick="setGender('m')" id="gender-m" style="flex:1;max-width:140px;padding:10px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:3px;cursor:pointer;background:rgba(255,255,255,.09);border:1px solid rgba(201,168,76,.75);color:rgba(250,243,224,.85)">♂ Férfi</button>
   </div>
 
   <div class="fg"><label class="fl">Keresztnév</label><input class="fi" type="text" id="pn" placeholder="pl. Anna"></div>
@@ -185,7 +247,7 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
     <div style="font-size:32px;margin-bottom:6px" id="res-em"></div>
     <div style="font-family:'Noto Serif SC',serif;font-size:28px;color:var(--gold);letter-spacing:4px;margin-bottom:4px" id="res-zh"></div>
     <div style="font-size:16px;color:var(--gold-l);font-weight:700;margin-bottom:4px" id="res-name"></div>
-    <div style="font-size:12px;color:rgba(250,243,224,.5)" id="res-sub"></div>
+    <div style="font-size:12px;color:rgba(250,243,224,.85)" id="res-sub"></div>
   </div>
 
   <div class="analysis-panel">
@@ -263,21 +325,15 @@ let gender='f';
 function setGender(g) {
   gender=g;
   document.getElementById('gender-f').style.background = g==='f' ? 'rgba(180,30,80,.25)' : 'rgba(255,255,255,.04)';
-  document.getElementById('gender-f').style.borderColor = g==='f' ? 'rgba(196,30,58,.7)' : 'rgba(201,168,76,.25)';
+  document.getElementById('gender-f').style.borderColor = g==='f' ? 'rgba(196,30,58,.7)' : 'rgba(201,168,76,.5)';
   document.getElementById('gender-f').style.color = g==='f' ? '#F5A0A0' : 'rgba(250,243,224,.5)';
   document.getElementById('gender-m').style.background = g==='m' ? 'rgba(30,80,150,.25)' : 'rgba(255,255,255,.04)';
-  document.getElementById('gender-m').style.borderColor = g==='m' ? 'rgba(60,130,220,.7)' : 'rgba(201,168,76,.25)';
+  document.getElementById('gender-m').style.borderColor = g==='m' ? 'rgba(60,130,220,.7)' : 'rgba(201,168,76,.5)';
   document.getElementById('gender-m').style.color = g==='m' ? '#9ab8f5' : 'rgba(250,243,224,.5)';
 }
 
 // Build animal grid
-const grid=document.getElementById('agrid');
-A.forEach((a,i)=>{
-  const d=document.createElement('div');
-  d.className='acard';d.id='ac'+i;
-  d.innerHTML='<span class="acard-em">'+a.em+'</span><span class="acard-zh">'+a.zh+'</span><span class="acard-name">'+a.n+'</span><div class="acard-desc">'+a.desc+'</div>';
-  grid.appendChild(d);
-});
+
 
 const cy=new Date().getFullYear();
 const ys=document.getElementById('py');
@@ -296,10 +352,8 @@ function upd(){
   const mo=document.getElementById('pmo').value;
   const h=document.getElementById('ph').value;
   const pv=document.getElementById('pprev');
-  document.querySelectorAll('.acard').forEach(c=>c.classList.remove('sel'));
   if(!y||!mo){pv.textContent='Add meg az adataidat…';return}
   const ai=getAi(y,mo);
-  document.getElementById('ac'+ai).classList.add('sel');
   const ha=h!==''?getHa(h):null;
   pv.textContent=A[ai].em+' '+A[ai].n+' · '+EL[getEi(y)]+(ha?' · Órajegy: '+ha.n:'');
 }
@@ -401,7 +455,7 @@ async function getAnalysis(type){
     scores.forEach((x,idx)=>{
       compatHtml+='<div class="compat-card"><div class="compat-rank">'+(idx+1)+'.</div><div class="compat-em">'+x.a.em+'</div><div class="compat-info"><div class="compat-name">'+x.a.zh+' '+x.a.n+'</div><div class="compat-score">'+x.s+'% kompatibilitás · '+x.a.el+' elem</div><div class="compat-bar"><div class="compat-fill" style="width:'+x.s+'%"></div></div></div></div>';
     });
-    compatHtml+='<div style="margin-top:14px;padding:10px;background:rgba(255,255,255,.04);border-radius:4px;font-size:11px;color:rgba(250,243,224,.4);text-align:center;font-style:italic">GPT-4o-mini részletes elemzés tölt…</div>';
+    compatHtml+='<div style="margin-top:14px;padding:10px;background:rgba(255,255,255,.09);border-radius:4px;font-size:11px;color:rgba(250,243,224,.75);text-align:center;font-style:italic">GPT-4o-mini részletes elemzés tölt…</div>';
     el2.innerHTML=compatHtml;
 
     try {
@@ -418,7 +472,7 @@ async function getAnalysis(type){
         html+='<div class="ar-sec"><div class="ar-sec-head"><span class="ar-sec-icon">'+sec.icon+'</span><span class="ar-sec-title">'+sec.title+'</span></div><div class="ar-sec-body">'+sec.body.replace(/\n/g,'<br>')+'</div></div>';
       });
       html+='<div class="ar-footer">Theodora Lau · The Handbook of Chinese Horoscopes · GPT-4o-mini elemzés</div>';
-      html+='<div style="text-align:center;margin-top:8px;font-size:11px;color:rgba(250,243,224,.3);font-style:italic">✨ Szórakoztató célú elemzés — vedd játékosan!</div>';
+      html+='<div style="text-align:center;margin-top:8px;font-size:11px;color:rgba(250,243,224,.65);font-style:italic">✨ Szórakoztató célú elemzés — vedd játékosan!</div>';
       el2.innerHTML=html;
       el2.scrollIntoView({behavior:'smooth',block:'start'});
       showPdfBtn();
@@ -444,7 +498,7 @@ async function getAnalysis(type){
       html+='<div class="ar-sec"><div class="ar-sec-head"><span class="ar-sec-icon">'+sec.icon+'</span><span class="ar-sec-title">'+sec.title+'</span></div><div class="ar-sec-body">'+sec.body.replace(/\n/g,'<br>')+'</div></div>';
     });
     html+='<div class="ar-footer">Theodora Lau · The Handbook of Chinese Horoscopes · GPT-4o-mini elemzés</div>';
-    html+='<div style="text-align:center;margin-top:8px;font-size:11px;color:rgba(250,243,224,.3);font-style:italic">✨ Szórakoztató célú elemzés — vedd játékosan!</div>';
+    html+='<div style="text-align:center;margin-top:8px;font-size:11px;color:rgba(250,243,224,.65);font-style:italic">✨ Szórakoztató célú elemzés — vedd játékosan!</div>';
     el.innerHTML=html;
     el.scrollIntoView({behavior:'smooth',block:'start'});
     showPdfBtn();
@@ -511,4 +565,3 @@ upd();
 </script>
 </body>
 </html>
-
