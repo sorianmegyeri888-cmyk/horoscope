@@ -323,18 +323,18 @@ window.closeZodiac=function(){
         <div class="person-icon icon-f">♀</div>
         <div class="person-title">Nő adatai</div>
       </div>
-      <div class="fg"><label class="fl">Keresztnév</label><input class="fi" type="text" id="fn" placeholder="pl. Anna"></div>
-      <div class="fg"><label class="fl">Születési év</label><select class="fi" id="fy" onchange="upd()"><option value="">— Válassz évet —</option></select></div>
+      <div class="fg"><label class="fl" id="lbl-fn">Keresztnév</label><input class="fi" type="text" id="fn" placeholder="pl. Anna"></div>
+      <div class="fg"><label class="fl" data-lbl="year">Születési év</label><select class="fi" id="fy" onchange="upd()"><option value="">— Válassz évet —</option></select></div>
       <div class="row3">
-        <div><label class="fl">Hónap</label>
+        <div><label class="fl" data-lbl="month">Hónap</label>
           <select class="fi" id="fmo" onchange="upd()">
             <option value="">—</option><option value="1">Január</option><option value="2">Február</option><option value="3">Március</option><option value="4">Április</option><option value="5">Május</option><option value="6">Június</option><option value="7">Július</option><option value="8">Augusztus</option><option value="9">Szeptember</option><option value="10">Október</option><option value="11">November</option><option value="12">December</option>
           </select>
         </div>
-        <div><label class="fl">Nap</label>
+        <div><label class="fl" data-lbl="day">Nap</label>
           <select class="fi" id="fd"><option value="">—</option></select>
         </div>
-        <div><label class="fl">Óra (Lau)</label>
+        <div><label class="fl" data-lbl="hour">Óra (Lau)</label>
           <select class="fi" id="fh" onchange="upd()"><option value="">—</option></select>
         </div>
       </div>
@@ -346,18 +346,18 @@ window.closeZodiac=function(){
         <div class="person-icon icon-m">♂</div>
         <div class="person-title">Férfi adatai</div>
       </div>
-      <div class="fg"><label class="fl">Keresztnév</label><input class="fi" type="text" id="mn" placeholder="pl. Péter"></div>
-      <div class="fg"><label class="fl">Születési év</label><select class="fi" id="my" onchange="upd()"><option value="">— Válassz évet —</option></select></div>
+      <div class="fg"><label class="fl" id="lbl-mn">Keresztnév</label><input class="fi" type="text" id="mn" placeholder="pl. Péter"></div>
+      <div class="fg"><label class="fl" data-lbl="year">Születési év</label><select class="fi" id="my" onchange="upd()"><option value="">— Válassz évet —</option></select></div>
       <div class="row3">
-        <div><label class="fl">Hónap</label>
+        <div><label class="fl" data-lbl="month">Hónap</label>
           <select class="fi" id="mmo" onchange="upd()">
             <option value="">—</option><option value="1">Január</option><option value="2">Február</option><option value="3">Március</option><option value="4">Április</option><option value="5">Május</option><option value="6">Június</option><option value="7">Július</option><option value="8">Augusztus</option><option value="9">Szeptember</option><option value="10">Október</option><option value="11">November</option><option value="12">December</option>
           </select>
         </div>
-        <div><label class="fl">Nap</label>
+        <div><label class="fl" data-lbl="day">Nap</label>
           <select class="fi" id="md"><option value="">—</option></select>
         </div>
-        <div><label class="fl">Óra (Lau)</label>
+        <div><label class="fl" data-lbl="hour">Óra (Lau)</label>
           <select class="fi" id="mh" onchange="upd()"><option value="">—</option></select>
         </div>
       </div>
@@ -555,24 +555,171 @@ const LANG=getLang();
 const T=LANGS[LANG];
 
 function applyTranslations(){
-  const h1=document.querySelector('h1');if(h1)h1.innerHTML=T.title+'<br>'+T.subtitle;
-  const hp=document.querySelector('.hero p');if(hp)hp.textContent=T.tagline;
-  const modeBtns=document.querySelectorAll('.mode-btn');
-  if(modeBtns[0])modeBtns[0].textContent=T.modePair;
-  if(modeBtns[1]){modeBtns[1].textContent=T.modeSingle;modeBtns[1].href='egyeni.html?lang='+LANG;}
-  const ft=document.querySelector('.form-title');if(ft)ft.textContent=T.formTitle;
-  const pt=document.querySelectorAll('.person-title');if(pt[0])pt[0].textContent=T.femaleTitle;if(pt[1])pt[1].textContent=T.maleTitle;
-  const fn=document.getElementById('fn');if(fn)fn.placeholder=T.namePh_f;
-  const mn=document.getElementById('mn');if(mn)mn.placeholder=T.namePh_m;
-  ['fy','my'].forEach(id=>{const s=document.getElementById(id);if(s&&s.options[0])s.options[0].text=T.yearPh;});
-  const cb=document.querySelector('.calc-btn');if(cb)cb.textContent=T.calcBtn;
-  document.querySelectorAll('.preview').forEach(p=>{if(p.textContent.trim()==='Add meg az adatokat…'||!p.textContent.trim())p.textContent=T.previewDefault;});
-  const bl=document.getElementById('btn-f-label');if(bl)bl.textContent=T.btn_f;
-  const bml=document.getElementById('btn-m-label');if(bml)bml.textContent=T.btn_m;
-  const bc=document.getElementById('btn-c');if(bc)bc.textContent=T.btn_c;
-  const bk=document.getElementById('btn-k');if(bk)bk.textContent=T.btn_k;
-  const br=document.getElementById('btn-r');if(br)br.textContent=T.btn_r;
-  const bs=document.getElementById('btn-s');if(bs)bs.textContent=T.btn_s;
+  // Hero
+  var h1=document.querySelector('h1');if(h1)h1.innerHTML=T.title+'<br>'+T.subtitle;
+  var hp=document.querySelector('.hero p');if(hp)hp.textContent=T.tagline;
+  // Mode buttons
+  var mbs=document.querySelectorAll('.mode-btn');
+  if(mbs[0])mbs[0].textContent=T.modePair;
+  if(mbs[1]){mbs[1].textContent=T.modeSingle;mbs[1].href='egyeni.html?lang='+LANG;}
+  // Form title
+  var ft=document.querySelector('.form-title');if(ft)ft.textContent=T.formTitle;
+  // Person titles
+  var pt=document.querySelectorAll('.person-title');
+  if(pt[0])pt[0].textContent=T.femaleTitle;if(pt[1])pt[1].textContent=T.maleTitle;
+  // Labels by data-lbl attribute (reliable)
+  document.querySelectorAll('[data-lbl]').forEach(function(l){
+    var lbl=l.getAttribute('data-lbl');
+    if(lbl==='name')l.textContent=T.nameLbl;
+    if(lbl==='year')l.textContent=T.yearLbl;
+    if(lbl==='month')l.textContent=T.monthLbl;
+    if(lbl==='day')l.textContent=T.dayLbl;
+    if(lbl==='hour')l.textContent=T.hourLbl;
+  });
+  // Placeholders
+  var fn=document.getElementById('fn');if(fn)fn.placeholder=T.namePh_f;
+  var mn=document.getElementById('mn');if(mn)mn.placeholder=T.namePh_m;
+  // Year selects
+  ['fy','my'].forEach(function(id){var s=document.getElementById(id);if(s&&s.options[0])s.options[0].text=T.yearPh;});
+  // Month selects - repopulate
+  ['fmo','mmo'].forEach(function(id){
+    var s=document.getElementById(id);if(!s)return;
+    var cur=s.value;
+    while(s.options.length>1)s.remove(1);
+    T.months.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;s.appendChild(o);});
+    s.value=cur;
+  });
+  // Calc button
+  var cb=document.querySelector('.calc-btn');if(cb)cb.textContent=T.calcBtn;
+  // Preview defaults
+  document.querySelectorAll('.preview').forEach(function(p){
+    p.textContent=T.previewDefault;
+  });
+  // Analysis buttons
+  var bl=document.getElementById('btn-f-label');if(bl)bl.textContent=T.btn_f;
+  var bml=document.getElementById('btn-m-label');if(bml)bml.textContent=T.btn_m;
+  var bc=document.getElementById('btn-c');if(bc)bc.textContent=T.btn_c;
+  var bk=document.getElementById('btn-k');if(bk)bk.textContent=T.btn_k;
+  var br=document.getElementById('btn-r');if(br)br.textContent=T.btn_r;
+  var bs=document.getElementById('btn-s');if(bs)bs.textContent=T.btn_s;
+  // Hook text
+  var hookTexts={
+    hu:"<strong>Ő az, akivel össze kellett találkoznod…</strong> vagy akit el kellett volna kerülnöd? Theodora Lau 5000 éves rendszere megmutatja.",
+    en:"<strong>The one you were meant to meet…</strong> or the one you should have avoided? Theodora Lau's 5000-year system reveals all.",
+    de:"<strong>Die Person, der du begegnen solltest…</strong> oder die du hättest meiden sollen? Theodora Laus 5000-jähriges System enthüllt alles.",
+    it:"<strong>La persona che dovevi incontrare…</strong> o quella che avresti dovuto evitare? Il sistema di Theodora Lau rivela tutto.",
+    es:"<strong>La persona que debías conocer…</strong> ¿o la que deberías haber evitado? El sistema de Theodora Lau lo revela todo.",
+    ro:"<strong>Persoana pe care trebuia să o întâlnești…</strong> sau pe care ar fi trebuit să o eviți? Sistemul lui Theodora Lau dezvăluie totul.",
+    fr:"<strong>La personne que vous deviez rencontrer…</strong> ou celle que vous auriez dû éviter? Le système de Theodora Lau révèle tout.",
+  };
+  var hookP=document.querySelector('.hook p');if(hookP&&hookTexts[LANG])hookP.innerHTML=hookTexts[LANG];
+  // Disclaimer
+  var discTexts={
+    hu:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Szórakoztató tartalom</strong> — Asztrológiai hagyományokon alapuló elemzés. Hiányos adatok esetén csak tájékoztató jellegű. Vedd játékosan! 🐉",
+    en:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Entertainment only</strong> — Astrology-based analysis for fun. Results depend on data completeness. Take it playfully! 🐉",
+    de:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Zur Unterhaltung</strong> — Astrologiebasierte Analyse zum Spaß. Ergebnisse hängen von der Datenvollständigkeit ab. 🐉",
+    it:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo intrattenimento</strong> — Analisi basata sull'astrologia per divertimento. I risultati dipendono dalla completezza dei dati. 🐉",
+    es:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo entretenimiento</strong> — Análisis basado en astrología por diversión. Los resultados dependen de la completitud de los datos. 🐉",
+    ro:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Doar divertisment</strong> — Analiză bazată pe astrologie pentru distracție. Rezultatele depind de completitudinea datelor. 🐉",
+    fr:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Divertissement uniquement</strong> — Analyse basée sur l'astrologie pour le plaisir. 🐉",
+  };
+  document.querySelectorAll('p').forEach(function(p){
+    if(p.textContent&&p.textContent.indexOf('Szórakoztató')!==-1&&discTexts[LANG])p.innerHTML=discTexts[LANG];
+  });
+  // Wheel hint
+  var wheelHints={hu:'Kattints egy állatjegyre a leíráshoz!',en:'Click on an animal sign for the description!',de:'Klicken Sie auf ein Tierzeichen!',it:'Clicca su un segno zodiacale!',es:'¡Haz clic en un signo animal!',ro:'Faceți clic pe un semn!',fr:'Cliquez sur un signe animal!'};
+  document.querySelectorAll('div,span').forEach(function(el){
+    if(el.textContent.trim()==='Kattints egy állatjegyre a leíráshoz!'&&wheelHints[LANG])el.textContent=wheelHints[LANG];
+  });
+  // Stats texts
+  var statsTexts={
+    hu:['pár ellenőrizte már','értékelés','éves tudás alapján'],
+    en:['couples analyzed','rating','years of wisdom'],
+    de:['Paare analysiert','Bewertung','Jahre Weisheit'],
+    it:['coppie analizzate','valutazione','anni di saggezza'],
+    es:['parejas analizadas','valoración','años de sabiduría'],
+    ro:['cupluri analizate','evaluare','ani de înțelepciune'],
+    fr:['couples analysés','évaluation','ans de sagesse'],
+  };
+  if(statsTexts[LANG]){
+    var statLbls=document.querySelectorAll('.stat-lbl');
+    if(statLbls[0])statLbls[0].textContent=statsTexts[LANG][0];
+    if(statLbls[1])statLbls[1].textContent=statsTexts[LANG][1];
+    if(statLbls[2])statLbls[2].textContent=statsTexts[LANG][2];
+  }
+  // Reviews
+  var reviewData={
+    en:[
+      {stars:'⭐⭐⭐⭐⭐',text:'"Stunningly accurate description of our relationship. Everyone should try it!"',name:'— Kate, London · 🐉 Dragon'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"The karma analysis amazed me — it described exactly the patterns I feel."',name:'— Peter, Manchester · 🐯 Tiger'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"The 12-year forecast was so detailed I bookmarked it and keep re-reading."',name:'— Susan, Birmingham · 🐰 Rabbit'},
+    ],
+    de:[
+      {stars:'⭐⭐⭐⭐⭐',text:'"Erstaunlich genaue Beschreibung unserer Beziehung. Jeder sollte es ausprobieren!"',name:'— Kata, Berlin · 🐉 Drache'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"Die Karma-Analyse hat mich verblüfft — sie beschrieb genau die Muster, die ich fühle."',name:'— Peter, München · 🐯 Tiger'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"Die 12-Jahres-Vorhersage war so detailliert, dass ich sie als Lesezeichen gespeichert habe."',name:'— Susanne, Hamburg · 🐰 Hase'},
+    ],
+    it:[
+      {stars:'⭐⭐⭐⭐⭐',text:'"Descrizione sorprendentemente accurata della nostra relazione. Tutti dovrebbero provarlo!"',name:'— Caterina, Roma · 🐉 Drago'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"L'analisi del karma mi ha stupito — ha descritto esattamente i modelli che sento."',name:'— Pietro, Milano · 🐯 Tigre'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"La previsione dei 12 anni era così dettagliata che l'ho aggiunta ai segnalibri."',name:'— Susanna, Napoli · 🐰 Coniglio'},
+    ],
+    es:[
+      {stars:'⭐⭐⭐⭐⭐',text:'"Descripción sorprendentemente precisa de nuestra relación. ¡Todo el mundo debería probarlo!"',name:'— Catalina, Madrid · 🐉 Dragón'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"El análisis del karma me asombró — describió exactamente los patrones que siento."',name:'— Pedro, Barcelona · 🐯 Tigre'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"El pronóstico de 12 años fue tan detallado que lo guardé en favoritos."',name:'— Susana, Valencia · 🐰 Conejo'},
+    ],
+    ro:[
+      {stars:'⭐⭐⭐⭐⭐',text:'"Descriere uimitor de precisă a relației noastre. Toată lumea ar trebui să încerce!"',name:'— Ana, București · 🐉 Dragon'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"Analiza karmei m-a uimit — a descris exact tiparele pe care le simt."',name:'— Petre, Cluj · 🐯 Tigru'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"Prognoza de 12 ani a fost atât de detaliată încât am salvat-o la marcaje."',name:'— Ioana, Timișoara · 🐰 Iepure'},
+    ],
+    fr:[
+      {stars:'⭐⭐⭐⭐⭐',text:'"Description étonnamment précise de notre relation. Tout le monde devrait l'essayer!"',name:'— Catherine, Paris · 🐉 Dragon'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"L'analyse karmique m'a étonné — elle décrit exactement les schémas que je ressens."',name:'— Pierre, Lyon · 🐯 Tigre'},
+      {stars:'⭐⭐⭐⭐⭐',text:'"La prévision sur 12 ans était si détaillée que je l'ai mise en favoris."',name:'— Suzanne, Marseille · 🐰 Lapin'},
+    ],
+  };
+  if(reviewData[LANG]){
+    var revEls=document.querySelectorAll('[style*="⭐⭐⭐⭐⭐"], .review-text');
+    var reviewBoxes=[];
+    document.querySelectorAll('div').forEach(function(d){
+      if(d.children.length>=2&&d.querySelector('p')&&d.textContent.indexOf('⭐')!==-1&&d.textContent.indexOf('Budapest')===-1||d.textContent.indexOf('Debrecen')===-1){
+      }
+    });
+    // Find the 3 review divs by their content
+    var allDivs=document.querySelectorAll('div');
+    var rd=reviewData[LANG];
+    var found=0;
+    allDivs.forEach(function(d){
+      if(found>=3)return;
+      if(d.children.length===3&&d.querySelector('p')&&d.textContent.indexOf('⭐⭐⭐⭐⭐')!==-1){
+        var starEl=d.children[0];
+        var textEl=d.children[1];
+        var nameEl=d.children[2];
+        if(starEl&&textEl&&nameEl&&rd[found]){
+          starEl.textContent=rd[found].stars;
+          textEl.innerHTML=rd[found].text;
+          nameEl.textContent=rd[found].name;
+          found++;
+        }
+      }
+    });
+  }
+  // Legal tabs
+  var legalTabs={
+    hu:['Impresszum','Adatkezelési tájékoztató','Felhasználási feltételek','Cookie tájékoztató'],
+    en:['Imprint','Privacy Policy','Terms of Use','Cookie Policy'],
+    de:['Impressum','Datenschutzerklärung','Nutzungsbedingungen','Cookie-Richtlinie'],
+    it:['Informazioni legali','Informativa sulla privacy','Termini di utilizzo','Informativa sui cookie'],
+    es:['Aviso legal','Política de privacidad','Condiciones de uso','Política de cookies'],
+    ro:['Mențiuni legale','Politica de confidențialitate','Termeni de utilizare','Politica de cookie-uri'],
+    fr:['Mentions légales','Politique de confidentialité','Conditions d'utilisation','Politique de cookies'],
+  };
+  if(legalTabs[LANG]){
+    var tabs=document.querySelectorAll('.legal-tab');
+    legalTabs[LANG].forEach(function(txt,i){if(tabs[i])tabs[i].firstChild.textContent=txt;});
+  }
 }
 
 function addLangSwitcher(){
