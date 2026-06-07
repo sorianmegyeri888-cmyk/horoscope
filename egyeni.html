@@ -177,31 +177,41 @@ var T=LANGS[LANG];
 
 function applyTranslationsE(){
   // Hero
-  var h1=document.querySelector('h1');if(h1)h1.innerHTML=T.title+'<br>'+T.subtitle;
-  var hp=document.querySelector('.hero p');if(hp)hp.textContent=T.tagline;
+  var h1=document.querySelector('h1');
+  if(h1)h1.innerHTML=T.title+'<br>'+T.subtitle;
+  var hp=document.querySelector('.hero p');
+  if(hp)hp.textContent=T.tagline;
   // Mode buttons
   var mbs=document.querySelectorAll('.mode-btn');
   if(mbs[0]){mbs[0].textContent=T.modePair;mbs[0].href='index.html?lang='+LANG;}
-  if(mbs[1]){mbs[1].textContent=T.modeSingle;}
+  if(mbs[1])mbs[1].textContent=T.modeSingle;
   // Form title
-  var ft=document.querySelector('.form-title');if(ft)ft.textContent=T.formTitle;
-  // Labels
-  document.querySelectorAll('.fl').forEach(function(l){
-    var t=l.textContent.trim();
-    if(t==='Keresztnév')l.textContent=T.nameLbl;
-    if(t==='Születési év')l.textContent=T.yearLbl;
-    if(t==='Hónap')l.textContent=T.monthLbl;
-    if(t==='Nap')l.textContent=T.dayLbl;
-    if(t==='Óra (Lau)')l.textContent=T.hourLbl;
+  var ft=document.querySelector('.form-title');
+  if(ft)ft.textContent=T.formTitle;
+  // Labels by data-lbl
+  document.querySelectorAll('[data-lbl]').forEach(function(l){
+    var lbl=l.getAttribute('data-lbl');
+    if(lbl==='name')l.textContent=T.nameLbl;
+    if(lbl==='year')l.textContent=T.yearLbl;
+    if(lbl==='month')l.textContent=T.monthLbl;
+    if(lbl==='day')l.textContent=T.dayLbl;
+    if(lbl==='hour')l.textContent=T.hourLbl;
   });
-  // Input placeholders
-  var pn=document.getElementById('pn');if(pn)pn.placeholder=gender==='f'?T.namePh_f:T.namePh_m;
+  // Placeholder
+  var pn=document.getElementById('pn');
+  if(pn)pn.placeholder=gender==='f'?T.namePh_f:T.namePh_m;
   // Year select
-  var py=document.getElementById('py');if(py&&py.options[0])py.options[0].text=T.yearPh;
+  var py=document.getElementById('py');
+  if(py&&py.options[0])py.options[0].text=T.yearPh;
+  // Month repopulate
+  var pmo=document.getElementById('pmo');
+  if(pmo){var cur=pmo.value;while(pmo.options.length>1)pmo.remove(1);T.months.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;pmo.appendChild(o);});pmo.value=cur;}
   // Calc button
-  var cb=document.querySelector('.calc-btn');if(cb)cb.textContent=T.calcBtn;
+  var cb=document.querySelector('.calc-btn');
+  if(cb)cb.textContent=T.calcBtn;
   // Preview
-  var pv=document.getElementById('pprev');if(pv&&pv.textContent.trim()==='Add meg az adataidat…')pv.textContent=T.previewDefault;
+  var pv=document.getElementById('pprev');
+  if(pv)pv.textContent=T.previewDefault;
   // Analysis buttons
   var bp=document.getElementById('btn-p');if(bp)bp.textContent=T.btn_p;
   var bk=document.getElementById('btn-k');if(bk)bk.textContent=T.btn_k;
@@ -213,6 +223,41 @@ function applyTranslationsE(){
   var gm=document.getElementById('gender-m');if(gm)gm.textContent=T.genderM;
   // PDF button
   var pdf=document.getElementById('pdf-btn');if(pdf)pdf.textContent=T.pdfBtn;
+  // Hook text
+  var hookTexts={
+    hu:"<strong>Ki vagy te valójában?</strong> Az állatjegyed, az elemed és az órajegyed együttesen rajzolják ki egyéni sorsodat — karrieredet, karmádat és a hozzád illő párt.",
+    en:"<strong>Who are you really?</strong> Your zodiac sign, element and hour sign together reveal your personal destiny — career, karma and your perfect match.",
+    de:"<strong>Wer bist du wirklich?</strong> Dein Tierzeichen, dein Element und dein Stundenzeichen zusammen enthüllen dein persönliches Schicksal.",
+    it:"<strong>Chi sei veramente?</strong> Il tuo segno zodiacale, elemento e segno orario rivelano insieme il tuo destino personale.",
+    es:"<strong>¿Quién eres realmente?</strong> Tu signo zodiacal, elemento y signo horario revelan juntos tu destino personal.",
+    ro:"<strong>Cine ești cu adevărat?</strong> Semnul tău zodiacal, elementul și semnul orar dezvăluie împreună destinul tău personal.",
+    fr:"<strong>Qui êtes-vous vraiment?</strong> Votre signe zodiacal, élément et signe horaire révèlent ensemble votre destin personnel.",
+  };
+  var hookP=document.querySelector('.hook p');
+  if(hookP&&hookTexts[LANG])hookP.innerHTML=hookTexts[LANG];
+  // Disclaimer
+  var discTexts={
+    hu:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Szórakoztató tartalom</strong> — Asztrológiai hagyományokon alapuló elemzés. Hiányos adatok esetén csak tájékoztató jellegű. Vedd játékosan! 🐉",
+    en:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Entertainment only</strong> — Astrology-based analysis for fun. Results depend on data completeness. Take it playfully! 🐉",
+    de:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Zur Unterhaltung</strong> — Astrologiebasierte Analyse zum Spaß. Ergebnisse hängen von der Datenvollständigkeit ab. 🐉",
+    it:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo intrattenimento</strong> — Analisi basata sull'astrologia per divertimento. 🐉",
+    es:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo entretenimiento</strong> — Análisis basado en astrología por diversión. 🐉",
+    ro:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Doar divertisment</strong> — Analiză bazată pe astrologie pentru distracție. 🐉",
+    fr:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Divertissement uniquement</strong> — Analyse basée sur l'astrologie pour le plaisir. 🐉",
+  };
+  document.querySelectorAll('p').forEach(function(p){
+    if(p.textContent&&p.textContent.indexOf('Szórakoztató')!==-1&&discTexts[LANG])p.innerHTML=discTexts[LANG];
+  });
+  // Wheel hint
+  var wheelHints={hu:'Kattints egy állatjegyre a leíráshoz!',en:'Click on an animal sign for the description!',de:'Klicken Sie auf ein Tierzeichen!',it:'Clicca su un segno zodiacale!',es:'¡Haz clic en un signo animal!',ro:'Faceți clic pe un semn!',fr:'Cliquez sur un signe animal!'};
+  document.querySelectorAll('div,span').forEach(function(el){
+    if(el.children.length===0&&el.textContent.trim()==='Kattints egy állatjegyre a leíráshoz!'&&wheelHints[LANG])el.textContent=wheelHints[LANG];
+  });
+  // Back link
+  var backLinks={hu:'← Vissza a párkapcsolati elemzéshez',en:'← Back to relationship analysis',de:'← Zurück zur Beziehungsanalyse',it:'← Torna all'analisi di coppia',es:'← Volver al análisis de pareja',ro:'← Înapoi la analiza relației',fr:'← Retour à l'analyse de couple'};
+  document.querySelectorAll('a').forEach(function(a){
+    if(a.textContent.trim()==='← Vissza a párkapcsolati elemzéshez'&&backLinks[LANG])a.textContent=backLinks[LANG];
+  });
 }
 
 function addLangSwitcherE(){
@@ -285,18 +330,18 @@ window.closeZodiac=function(){document.getElementById('zodiac-popup').style.disp
     <button onclick="setGender('m')" id="gender-m" style="flex:1;max-width:140px;padding:10px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:3px;cursor:pointer;background:rgba(255,255,255,.09);border:1px solid rgba(201,168,76,.75);color:rgba(250,243,224,.85)">♂ Férfi</button>
   </div>
 
-  <div class="fg"><label class="fl">Keresztnév</label><input class="fi" type="text" id="pn" placeholder="pl. Anna"></div>
-  <div class="fg"><label class="fl">Születési év</label><select class="fi" id="py" onchange="upd()"><option value="">— Válassz évet —</option></select></div>
+  <div class="fg"><label class="fl" data-lbl="name">Keresztnév</label><input class="fi" type="text" id="pn" placeholder="pl. Anna"></div>
+  <div class="fg"><label class="fl" data-lbl="year">Születési év</label><select class="fi" id="py" onchange="upd()"><option value="">— Válassz évet —</option></select></div>
   <div class="row3">
-    <div><label class="fl">Hónap</label>
+    <div><label class="fl" data-lbl="month">Hónap</label>
       <select class="fi" id="pmo" onchange="upd()">
         <option value="">—</option><option value="1">Január</option><option value="2">Február</option><option value="3">Március</option><option value="4">Április</option><option value="5">Május</option><option value="6">Június</option><option value="7">Július</option><option value="8">Augusztus</option><option value="9">Szeptember</option><option value="10">Október</option><option value="11">November</option><option value="12">December</option>
       </select>
     </div>
-    <div><label class="fl">Nap</label>
+    <div><label class="fl" data-lbl="day">Nap</label>
       <select class="fi" id="pd"><option value="">—</option></select>
     </div>
-    <div><label class="fl">Óra (Lau)</label>
+    <div><label class="fl" data-lbl="hour">Óra (Lau)</label>
       <select class="fi" id="ph" onchange="upd()"><option value="">—</option></select>
     </div>
   </div>
