@@ -197,15 +197,15 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
 <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px">
   <div style="text-align:center;padding:12px 20px;background:rgba(255,255,255,.09);border:1px solid rgba(201,168,76,.7);border-radius:6px;flex:1;min-width:130px;max-width:180px">
     <div style="font-family:'Noto Serif SC',serif;font-size:24px;color:var(--gold);font-weight:700" id="counter">12,847</div>
-    <div style="font-size:11px;color:rgba(250,243,224,.85);margin-top:3px">pár ellenőrizte már</div>
+    <div style="font-size:11px;color:rgba(250,243,224,.85);margin-top:3px" id="stat-1">pár ellenőrizte már</div>
   </div>
   <div style="text-align:center;padding:12px 20px;background:rgba(255,255,255,.09);border:1px solid rgba(201,168,76,.7);border-radius:6px;flex:1;min-width:130px;max-width:180px">
     <div style="font-family:'Noto Serif SC',serif;font-size:24px;color:var(--gold);font-weight:700">⭐⭐⭐⭐⭐</div>
-    <div style="font-size:11px;color:rgba(250,243,224,.85);margin-top:3px">4.9/5 értékelés</div>
+    <div style="font-size:11px;color:rgba(250,243,224,.85);margin-top:3px" id="stat-2">4.9/5 értékelés</div>
   </div>
   <div style="text-align:center;padding:12px 20px;background:rgba(255,255,255,.09);border:1px solid rgba(201,168,76,.7);border-radius:6px;flex:1;min-width:130px;max-width:180px">
     <div style="font-family:'Noto Serif SC',serif;font-size:24px;color:var(--gold);font-weight:700">5000+</div>
-    <div style="font-size:11px;color:rgba(250,243,224,.85);margin-top:3px">éves tudás alapján</div>
+    <div style="font-size:11px;color:rgba(250,243,224,.85);margin-top:3px" id="stat-3">éves tudás alapján</div>
   </div>
 </div>
 
@@ -230,7 +230,7 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
 
 <!-- DISCLAIMER -->
 <div style="text-align:center;margin-bottom:24px;padding:12px 20px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.4);border-radius:4px">
-  <p style="font-size:12px;color:rgba(250,243,224,.85);font-style:italic;line-height:1.7">
+  <p id="disclaimer-p" style="font-size:12px;color:rgba(250,243,224,.85);font-style:italic;line-height:1.7">
     ✨ <strong style="color:rgba(201,168,76,.7);font-style:normal">Szórakoztató tartalom</strong> — Asztrológiai hagyományokon alapuló elemzés. Hiányos adatok esetén csak tájékoztató jellegű. Vedd játékosan! 🐉
   </p>
 </div>
@@ -239,7 +239,7 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
 <!-- ÁLLATJEGY KERÉK -->
 <div style="text-align:center;margin-bottom:10px">
   <span style="font-family:'Noto Serif SC',serif;font-size:18px;color:rgba(240,217,138,.8);letter-spacing:5px;display:block;margin-bottom:3px">十二生肖</span>
-  <span style="font-size:13px;color:#F0D98A">Kattints egy állatjegyre a leíráshoz!</span>
+  <span id="wheel-hint" style="font-size:13px;color:#F0D98A">Kattints egy állatjegyre a leíráshoz!</span>
 </div>
 <div style="position:relative;width:100%;max-width:540px;margin:0 auto 28px">
   <svg viewBox="0 0 540 540" xmlns="http://www.w3.org/2000/svg" id="zodiac-wheel" style="display:block;width:100%;height:auto;cursor:pointer"></svg>
@@ -627,13 +627,53 @@ function applyTranslations(){
   var hookP=document.querySelector('.hook p');
   if(hookP&&hookTexts[LANG])hookP.innerHTML=hookTexts[LANG];
   // Stats
-  var sl=document.querySelectorAll('.stat-lbl');
-  var st={en:['couples analyzed','rating','years of wisdom'],de:['Paare analysiert','Bewertung','Jahre Weisheit'],it:['coppie analizzate','valutazione','anni di saggezza'],es:['parejas analizadas','valoración','años de sabiduría'],ro:['cupluri analizate','evaluare','ani de înțelepciune'],fr:['couples analysés','évaluation','ans de sagesse']};
-  if(sl.length&&st[LANG]){sl[0].textContent=st[LANG][0];if(sl[1])sl[1].textContent=st[LANG][1];if(sl[2])sl[2].textContent=st[LANG][2];}
+  // Stats by ID
+  var st={en:['couples analyzed','⭐ 4.9/5 rating','years of wisdom'],de:['Paare analysiert','⭐ 4.9/5 Bewertung','Jahre Weisheit'],it:['coppie analizzate','⭐ 4.9/5 valutazione','anni di saggezza'],es:['parejas analizadas','⭐ 4.9/5 valoración','años de sabiduría'],ro:['cupluri analizate','⭐ 4.9/5 evaluare','ani de înțelepciune'],fr:['couples analysés','⭐ 4.9/5 évaluation','ans de sagesse']};
+  if(st[LANG]){
+    var s1=document.getElementById('stat-1');if(s1)s1.textContent=st[LANG][0];
+    var s2=document.getElementById('stat-2');if(s2)s2.textContent=st[LANG][1];
+    var s3=document.getElementById('stat-3');if(s3)s3.textContent=st[LANG][2];
+  }
+  // Wheel hint
+  var wh=document.getElementById('wheel-hint');
+  var wht={en:'Click on an animal sign for the description!',de:'Klicken Sie auf ein Tierzeichen!',it:'Clicca su un segno zodiacale!',es:'¡Haz clic en un signo animal!',ro:'Faceți clic pe un semn animal!',fr:'Cliquez sur un signe animal!'};
+  if(wh&&wht[LANG])wh.textContent=wht[LANG];
+  // Disclaimer
+  var dp=document.getElementById('disclaimer-p');
+  var dt={en:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Entertainment only</strong> — Astrology-based analysis for fun. Results depend on data completeness. Take it playfully! 🐉",de:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Zur Unterhaltung</strong> — Astrologiebasierte Analyse zum Spaß. 🐉",it:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo intrattenimento</strong> — Analisi basata sull'astrologia per divertimento. 🐉",es:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo entretenimiento</strong> — Análisis basado en astrología por diversión. 🐉",ro:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Doar divertisment</strong> — Analiză bazată pe astrologie. 🐉",fr:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Divertissement uniquement</strong> — Analyse basée sur l'astrologie. 🐉"};
+  if(dp&&dt[LANG])dp.innerHTML=dt[LANG];
   // Legal tabs
   var lt=document.querySelectorAll('.legal-tab');
   var ltt={en:['Imprint','Privacy Policy','Terms of Use','Cookie Policy'],de:['Impressum','Datenschutz','Nutzungsbedingungen','Cookie-Richtlinie'],it:['Informazioni legali','Privacy','Termini','Cookie'],es:['Aviso legal','Privacidad','Condiciones','Cookies'],ro:['Mențiuni legale','Confidențialitate','Termeni','Cookie-uri'],fr:['Mentions légales','Confidentialité','Conditions','Cookies']};
   if(lt.length&&ltt[LANG]){lt.forEach(function(t,i){if(ltt[LANG][i])t.childNodes[0].textContent=ltt[LANG][i];});}
+  // Reviews
+  var reviews={
+    en:[{t:'"Stunningly accurate description of our relationship. Everyone should try it!"',n:'— Kate, London · 🐉 Dragon'},{t:'"The karma analysis amazed me — it described exactly the patterns I feel."',n:'— Peter, Manchester · 🐯 Tiger'},{t:'"The 12-year forecast was so detailed I bookmarked it and keep re-reading."',n:'— Susan, Birmingham · 🐰 Rabbit'}],
+    de:[{t:'"Erstaunlich genaue Beschreibung unserer Beziehung. Jeder sollte es ausprobieren!"',n:'— Kata, Berlin · 🐉 Drache'},{t:'"Die Karma-Analyse hat mich verblüfft — sie beschrieb genau die Muster, die ich fühle."',n:'— Peter, München · 🐯 Tiger'},{t:'"Die 12-Jahres-Vorhersage war so detailliert, dass ich sie als Lesezeichen gespeichert habe."',n:'— Susanne, Hamburg · 🐰 Hase'}],
+    it:[{t:'"Descrizione sorprendentemente accurata della nostra relazione!"',n:'— Caterina, Roma · 🐉 Drago'},{t:'"L'analisi del karma mi ha stupito — ha descritto esattamente i modelli che sento."',n:'— Pietro, Milano · 🐯 Tigre'},{t:'"La previsione dei 12 anni era così dettagliata che l'ho aggiunta ai segnalibri."',n:'— Susanna, Napoli · 🐰 Coniglio'}],
+    es:[{t:'"¡Descripción sorprendentemente precisa de nuestra relación!"',n:'— Ana, Madrid · 🐉 Dragón'},{t:'"El análisis del karma me asombró — describió exactamente los patrones que siento."',n:'— Pedro, Barcelona · 🐯 Tigre'},{t:'"El pronóstico de 12 años fue tan detallado que lo guardé en favoritos."',n:'— Susana, Valencia · 🐰 Conejo'}],
+    ro:[{t:'"Descriere uimitor de precisă a relației noastre!"',n:'— Ana, București · 🐉 Dragon'},{t:'"Analiza karmei m-a uimit — a descris exact tiparele pe care le simt."',n:'— Petre, Cluj · 🐯 Tigru'},{t:'"Prognoza de 12 ani a fost atât de detaliată încât am salvat-o la marcaje."',n:'— Ioana, Timișoara · 🐰 Iepure'}],
+    fr:[{t:'"Description étonnamment précise de notre relation!"',n:'— Catherine, Paris · 🐉 Dragon'},{t:'"L'analyse karmique m'a étonné — elle décrit exactement les schémas que je ressens."',n:'— Pierre, Lyon · 🐯 Tigre'},{t:'"La prévision sur 12 ans était si détaillée que je l'ai mise en favoris."',n:'— Suzanne, Marseille · 🐰 Lapin'}]
+  };
+  if(reviews[LANG]){
+    var allDivs=document.querySelectorAll('div');
+    var found=0;
+    var rd=reviews[LANG];
+    allDivs.forEach(function(d){
+      if(found>=3)return;
+      var txt=d.textContent||'';
+      if(txt.indexOf('Döbbenetes')!==-1||txt.indexOf('karma elemzés')!==-1||txt.indexOf('12 éves előrevetítés')!==-1){
+        var ps=d.querySelectorAll('p');
+        var spans=d.querySelectorAll('div,span');
+        if(ps.length>=1)ps[0].textContent=rd[found].t;
+        // Find name element
+        d.querySelectorAll('div').forEach(function(el){
+          if(el.textContent.indexOf('Budapest')!==-1||el.textContent.indexOf('Debrecen')!==-1||el.textContent.indexOf('Pécs')!==-1)el.textContent=rd[found].n;
+        });
+        found++;
+      }
+    });
+  }
 }
 
 function addLangSwitcher(){
