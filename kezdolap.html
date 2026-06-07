@@ -89,23 +89,23 @@ footer{font-size:10px;color:rgba(250,243,224,.15);font-family:'Noto Serif SC',se
   <div class="lang-section-title">Choose your language · Válassz nyelvet · Wähle deine Sprache</div>
 
   <div class="lang-grid">
-    <a href="index.html?lang=hu" class="lang-btn" onclick="setLang('hu')">
+    <a href="#" class="lang-btn" onclick="setLang('hu');return false;">
       <span class="lang-badge-tag">Default</span>
       <span class="lang-flag">🇭🇺</span>
       <span class="lang-name">Magyar</span>
       <span class="lang-native">Magyar</span>
     </a>
-    <a href="index.html?lang=en" class="lang-btn" onclick="setLang('en')">
+    <a href="#" class="lang-btn" onclick="setLang('en');return false;">
       <span class="lang-flag">🇬🇧</span>
       <span class="lang-name">English</span>
       <span class="lang-native">English</span>
     </a>
-    <a href="index.html?lang=de" class="lang-btn" onclick="setLang('de')">
+    <a href="#" class="lang-btn" onclick="setLang('de');return false;">
       <span class="lang-flag">🇩🇪</span>
       <span class="lang-name">Deutsch</span>
       <span class="lang-native">Deutsch</span>
     </a>
-    <a href="index.html?lang=it" class="lang-btn" onclick="setLang('it')">
+    <a href="#" class="lang-btn" onclick="setLang('it');return false;">
       <span class="lang-flag">🇮🇹</span>
       <span class="lang-name">Italiano</span>
       <span class="lang-native">Italiano</span>
@@ -113,17 +113,17 @@ footer{font-size:10px;color:rgba(250,243,224,.15);font-family:'Noto Serif SC',se
   </div>
 
   <div class="lang-extra">
-    <a href="index.html?lang=es" class="lang-btn" onclick="setLang('es')">
+    <a href="#" class="lang-btn" onclick="setLang('es');return false;">
       <span class="lang-flag">🇪🇸</span>
       <span class="lang-name">Español</span>
       <span class="lang-native">Español</span>
     </a>
-    <a href="index.html?lang=ro" class="lang-btn" onclick="setLang('ro')">
+    <a href="#" class="lang-btn" onclick="setLang('ro');return false;">
       <span class="lang-flag">🇷🇴</span>
       <span class="lang-name">Română</span>
       <span class="lang-native">Română</span>
     </a>
-    <a href="index.html?lang=fr" class="lang-btn" onclick="setLang('fr')">
+    <a href="#" class="lang-btn" onclick="setLang('fr');return false;">
       <span class="lang-flag">🇫🇷</span>
       <span class="lang-name">Français</span>
       <span class="lang-native">Français</span>
@@ -136,6 +136,11 @@ footer{font-size:10px;color:rgba(250,243,224,.15);font-family:'Noto Serif SC',se
 <script>
 function setLang(lang) {
   localStorage.setItem('horoscope-lang', lang);
+  // Small delay to ensure localStorage is written before navigation
+  setTimeout(function() {
+    window.location.href = 'index.html?lang=' + lang;
+  }, 50);
+  return false;
 }
 
 // Show "continue" bar if language already chosen
