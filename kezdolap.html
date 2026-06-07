@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chinese Horoscope — Dragon Phoenix Destiny</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#C41E3A;--gold:#D4B85C;--gold-l:#F0D98A;--cream:#FAF3E0;--ink:#1e1b4b}
+body{background:var(--ink);color:var(--cream);font-family:'Libre Baskerville',Georgia,serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 16px 80px}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 20% 80%,rgba(196,30,58,.18) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(100,80,200,.14) 0%,transparent 50%),radial-gradient(circle at 50% 50%,rgba(212,184,92,.06) 0%,transparent 70%);pointer-events:none}
+.border-frame{position:fixed;inset:10px;border:1px solid rgba(212,184,92,.25);pointer-events:none;z-index:100}
+.wrap{max-width:880px;width:100%;position:relative;z-index:1;text-align:center}
+
+/* HERO */
+.hero-zh{font-family:'Noto Serif SC',serif;font-size:clamp(64px,12vw,110px);color:var(--red);letter-spacing:14px;line-height:1;text-shadow:0 0 60px rgba(196,30,58,.4),0 0 120px rgba(196,30,58,.15);display:block;margin-bottom:10px;animation:fadeIn 1.2s ease}
+.hero-line{width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:12px auto 18px}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,48px);color:var(--gold-l);font-weight:700;line-height:1.2;margin-bottom:10px;animation:fadeIn 1.4s ease}
+.hero-sub-line{font-family:'Playfair Display',serif;font-size:clamp(14px,2.2vw,20px);color:rgba(240,217,138,.7);font-style:italic;margin-bottom:8px;animation:fadeIn 1.5s ease}
+
+/* FEATURE BADGES */
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:24px;animation:fadeIn 1.6s ease}
+.badge{border-radius:22px;padding:7px 18px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700}
+
+/* ZODIAC RING */
+.zodiac-ring{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:30px;font-size:32px;animation:fadeIn 1.7s ease}
+.zodiac-ring span{display:inline-block;animation:float 3s ease-in-out infinite}
+.zodiac-ring span:nth-child(2){animation-delay:.25s}.zodiac-ring span:nth-child(3){animation-delay:.5s}
+.zodiac-ring span:nth-child(4){animation-delay:.75s}.zodiac-ring span:nth-child(5){animation-delay:1s}
+.zodiac-ring span:nth-child(6){animation-delay:1.25s}.zodiac-ring span:nth-child(7){animation-delay:1.5s}
+.zodiac-ring span:nth-child(8){animation-delay:1.75s}.zodiac-ring span:nth-child(9){animation-delay:2s}
+.zodiac-ring span:nth-child(10){animation-delay:2.25s}.zodiac-ring span:nth-child(11){animation-delay:2.5s}
+.zodiac-ring span:nth-child(12){animation-delay:2.75s}
+
+/* LANGUAGE SECTION */
+.lang-section-title{font-size:12px;color:rgba(212,184,92,.65);letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;animation:fadeIn 1.8s ease}
+.lang-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px;animation:fadeIn 2s ease}
+.lang-extra{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;animation:fadeIn 2s ease}
+@media(max-width:580px){.lang-grid{grid-template-columns:repeat(2,1fr)}.lang-extra{grid-template-columns:repeat(2,1fr)}}
+.lang-btn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 14px;background:rgba(255,255,255,.07);border:1.5px solid rgba(212,184,92,.32);border-radius:14px;cursor:pointer;text-decoration:none;color:var(--cream);transition:all .22s;position:relative;overflow:hidden}
+.lang-btn:hover{border-color:var(--gold-l);background:rgba(255,255,255,.13);transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.lang-flag{font-size:40px;line-height:1;display:block}
+.lang-name{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold-l);font-weight:700}
+.lang-native{font-size:12px;color:rgba(250,243,224,.5);font-style:italic}
+.lang-badge-tag{position:absolute;top:8px;right:8px;background:var(--red);color:#fff;font-size:9px;padding:2px 7px;border-radius:10px;font-weight:700;letter-spacing:.5px}
+
+/* STATS */
+.stats{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:28px;animation:fadeIn 2.1s ease}
+.stat{text-align:center;padding:12px 20px;background:rgba(255,255,255,.06);border:1px solid rgba(212,184,92,.25);border-radius:10px}
+.stat-num{font-family:'Noto Serif SC',serif;font-size:22px;color:var(--gold);font-weight:700;display:block}
+.stat-lbl{font-size:11px;color:rgba(250,243,224,.5);margin-top:3px;display:block}
+
+/* FOOTER */
+footer{font-size:10px;color:rgba(250,243,224,.15);font-family:'Noto Serif SC',serif;letter-spacing:4px;margin-top:10px}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="border-frame"></div>
+<div class="wrap">
+
+  <span class="hero-zh">龍 鳳 緣</span>
+  <div class="hero-line"></div>
+  <h1 class="hero-title">Chinese Horoscope</h1>
+  <p class="hero-sub-line">Discover your destiny — written in the stars since birth</p>
+
+  <div class="badges">
+    <span class="badge" style="background:rgba(196,30,58,.18);border:1px solid rgba(196,30,58,.5);color:#F5A0A0">💕 Compatibility</span>
+    <span class="badge" style="background:rgba(80,40,180,.18);border:1px solid rgba(150,120,220,.5);color:#c8a8e8">☯️ Karma</span>
+    <span class="badge" style="background:rgba(30,80,30,.18);border:1px solid rgba(100,180,100,.5);color:#a8d8a8">💼 Career & Money</span>
+    <span class="badge" style="background:rgba(20,60,100,.18);border:1px solid rgba(80,140,200,.5);color:#a8c8e8">🔮 12 Year Forecast</span>
+    <span class="badge" style="background:rgba(100,70,20,.18);border:1px solid rgba(201,168,76,.5);color:#F0D98A">✨ Personal Destiny</span>
+  </div>
+
+  <div class="zodiac-ring">
+    <span>🐀</span><span>🐂</span><span>🐅</span><span>🐇</span><span>🐉</span><span>🐍</span>
+    <span>🐎</span><span>🐐</span><span>🐒</span><span>🐓</span><span>🐕</span><span>🐷</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-num">12,847+</span><span class="stat-lbl">couples analyzed</span></div>
+    <div class="stat"><span class="stat-num">⭐ 4.9/5</span><span class="stat-lbl">average rating</span></div>
+    <div class="stat"><span class="stat-num">5,000+</span><span class="stat-lbl">years of wisdom</span></div>
+  </div>
+
+  <div class="lang-section-title">Choose your language · Válassz nyelvet · Wähle deine Sprache</div>
+
+  <div class="lang-grid">
+    <a href="index.html?lang=hu" class="lang-btn" onclick="setLang('hu')">
+      <span class="lang-badge-tag">Default</span>
+      <span class="lang-flag">🇭🇺</span>
+      <span class="lang-name">Magyar</span>
+      <span class="lang-native">Magyar</span>
+    </a>
+    <a href="index.html?lang=en" class="lang-btn" onclick="setLang('en')">
+      <span class="lang-flag">🇬🇧</span>
+      <span class="lang-name">English</span>
+      <span class="lang-native">English</span>
+    </a>
+    <a href="index.html?lang=de" class="lang-btn" onclick="setLang('de')">
+      <span class="lang-flag">🇩🇪</span>
+      <span class="lang-name">Deutsch</span>
+      <span class="lang-native">Deutsch</span>
+    </a>
+    <a href="index.html?lang=it" class="lang-btn" onclick="setLang('it')">
+      <span class="lang-flag">🇮🇹</span>
+      <span class="lang-name">Italiano</span>
+      <span class="lang-native">Italiano</span>
+    </a>
+  </div>
+
+  <div class="lang-extra">
+    <a href="index.html?lang=es" class="lang-btn" onclick="setLang('es')">
+      <span class="lang-flag">🇪🇸</span>
+      <span class="lang-name">Español</span>
+      <span class="lang-native">Español</span>
+    </a>
+    <a href="index.html?lang=ro" class="lang-btn" onclick="setLang('ro')">
+      <span class="lang-flag">🇷🇴</span>
+      <span class="lang-name">Română</span>
+      <span class="lang-native">Română</span>
+    </a>
+    <a href="index.html?lang=fr" class="lang-btn" onclick="setLang('fr')">
+      <span class="lang-flag">🇫🇷</span>
+      <span class="lang-name">Français</span>
+      <span class="lang-native">Français</span>
+    </a>
+  </div>
+
+  <footer>天 地 人 和 · © 2025 Siker-SM Kft. · All rights reserved · Theodora Lau system</footer>
+</div>
+
+<script>
+function setLang(lang) {
+  localStorage.setItem('horoscope-lang', lang);
+}
+
+// Show "continue" bar if language already chosen
+const saved = localStorage.getItem('horoscope-lang');
+if(saved) {
+  const flags = {hu:'🇭🇺 Magyar',en:'🇬🇧 English',de:'🇩🇪 Deutsch',it:'🇮🇹 Italiano',es:'🇪🇸 Español',ro:'🇷🇴 Română',fr:'🇫🇷 Français'};
+  const bar = document.createElement('div');
+  bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:rgba(20,18,60,.97);border-top:1px solid rgba(212,184,92,.35);padding:13px 20px;display:flex;align-items:center;justify-content:space-between;z-index:200;gap:12px;flex-wrap:wrap';
+  bar.innerHTML = '<span style="font-size:13px;color:#F0D98A">Last language: <strong>'+(flags[saved]||saved)+'</strong></span>'
+    +'<div style="display:flex;gap:8px">'
+    +'<a href="index.html?lang='+saved+'" onclick="setLang(\''+saved+'\')" style="background:linear-gradient(135deg,#5C0000,#C41E3A);color:#F0D98A;padding:9px 20px;border-radius:4px;text-decoration:none;font-size:13px;font-weight:700;font-family:Georgia,serif">→ Continue</a>'
+    +'<button onclick="localStorage.removeItem(\'horoscope-lang\');this.parentElement.parentElement.remove()" style="background:transparent;border:1px solid rgba(212,184,92,.3);color:rgba(250,243,224,.5);padding:9px 14px;border-radius:4px;cursor:pointer;font-size:12px">Change</button>'
+    +'</div>';
+  document.body.appendChild(bar);
+}
+</script>
+</body>
+</html>
