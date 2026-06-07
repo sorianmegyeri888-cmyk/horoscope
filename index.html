@@ -181,10 +181,10 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
 
 <!-- MÓD VÁLASZTÓ -->
 <div style="display:flex;gap:12px;justify-content:center;margin-bottom:24px">
-  <a href="index.html" style="flex:1;max-width:200px;text-align:center;padding:14px 10px;background:linear-gradient(135deg,#5C0000,#C41E3A);color:#E8C97A;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:4px;text-decoration:none;display:block;box-shadow:0 4px 18px rgba(196,30,58,.3)">
+  <a id="btn-mode-pair" href="index.html" style="flex:1;max-width:200px;text-align:center;padding:14px 10px;background:linear-gradient(135deg,#5C0000,#C41E3A);color:#E8C97A;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:4px;text-decoration:none;display:block;box-shadow:0 4px 18px rgba(196,30,58,.3)">
     ✦ Van párom
   </a>
-  <a href="egyeni.html" style="flex:1;max-width:200px;text-align:center;padding:14px 10px;background:rgba(255,255,255,.1);color:rgba(250,243,224,.6);font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:4px;text-decoration:none;display:block;border:1px solid rgba(201,168,76,.75)">
+  <a id="btn-mode-single" href="egyeni.html" style="flex:1;max-width:200px;text-align:center;padding:14px 10px;background:rgba(255,255,255,.1);color:rgba(250,243,224,.6);font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:4px;text-decoration:none;display:block;border:1px solid rgba(201,168,76,.75)">
     🌙 Nincs párom
   </a>
 </div>
@@ -559,9 +559,10 @@ function applyTranslations(){
   var h1=document.querySelector('h1');if(h1)h1.innerHTML=T.title+'<br>'+T.subtitle;
   var hp=document.querySelector('.hero p');if(hp)hp.textContent=T.tagline;
   // Mode buttons
-  var mbs=document.querySelectorAll('.mode-btn');
-  if(mbs[0])mbs[0].textContent=T.modePair;
-  if(mbs[1]){mbs[1].textContent=T.modeSingle;mbs[1].href='egyeni.html?lang='+LANG;}
+  var mbPair=document.getElementById('btn-mode-pair');
+  var mbSingle=document.getElementById('btn-mode-single');
+  if(mbPair)mbPair.textContent=T.modePair;
+  if(mbSingle){mbSingle.textContent=T.modeSingle;mbSingle.href='egyeni.html?lang='+LANG;}
   // Form title
   var ft=document.querySelector('.form-title');if(ft)ft.textContent=T.formTitle;
   // Person titles
