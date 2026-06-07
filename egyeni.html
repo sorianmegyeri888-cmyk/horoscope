@@ -625,9 +625,11 @@ function downloadPDF(){
   doc.save('sors-jelentes-'+name+'.pdf');
 }
 
-applyTranslationsE();
-addLangSwitcherE();
-upd();
+document.addEventListener('DOMContentLoaded', function() {
+  applyTranslationsE();
+  addLangSwitcherE();
+  upd();
+});
 </script>
 </body>
 </html>
