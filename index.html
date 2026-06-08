@@ -419,7 +419,7 @@ window.closeZodiac=function(){
       <button class="abtn abtn-m" id="btn-m" onclick="getAnalysis('m')">♂ <span id="btn-m-label">Férfi elemzése</span></button>
     </div>
     <div style="margin-top:8px;padding:10px 12px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.7);border-radius:4px">
-      <div style="text-align:center;font-size:10px;color:rgba(201,168,76,.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">✦ Prémium elemzések</div>
+      <div style="text-align:center;font-size:10px;color:rgba(201,168,76,.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px" id="premium-lbl">✦ Prémium elemzések</div>
       <div class="analysis-btns" style="grid-template-columns:1fr 1fr;margin-bottom:7px">
         <button class="abtn abtn-c" id="btn-c" onclick="getAnalysis('c')">✦ Tartós-e a kapcsolatunk?</button>
         <button class="abtn abtn-k" id="btn-k" onclick="getAnalysis('k')">💼 Karrier & pénz sorsunk</button>
@@ -731,6 +731,10 @@ function applyTranslations(){
   var dp=document.getElementById('disclaimer-p');
   var dt={en:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Entertainment only</strong> — Astrology-based analysis for fun. Results depend on data completeness. Take it playfully! 🐉",de:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Zur Unterhaltung</strong> — Astrologiebasierte Analyse zum Spaß. 🐉",it:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo intrattenimento</strong> — Analisi basata sull\'astrologia per divertimento. 🐉",es:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo entretenimiento</strong> — Análisis basado en astrología por diversión. 🐉",ro:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Doar divertisment</strong> — Analiză bazată pe astrologie. 🐉",fr:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Divertissement uniquement</strong> — Analyse basée sur l\'astrologie. 🐉"};
   if(dp&&dt[LANG])dp.innerHTML=dt[LANG];
+  // Premium label
+  var pl=document.getElementById('premium-lbl');
+  var plt={en:'✦ Premium analyses',de:'✦ Premium Analysen',it:'✦ Analisi Premium',es:'✦ Análisis Premium',ro:'✦ Analize Premium',fr:'✦ Analyses Premium'};
+  if(pl&&plt[LANG])pl.textContent=plt[LANG];
   // Survey texts
   var st2=document.querySelector('#survey-box div[style*="text-align:center"]');
   if(st2&&T.survey_title)st2.textContent=T.survey_title;
@@ -817,18 +821,30 @@ const CM=[
 ];
 
 const EL=["Fém","Víz","Fa","Tűz","Föld"];
+var EL_LANGS={en:["Metal","Water","Wood","Fire","Earth"],de:["Metall","Wasser","Holz","Feuer","Erde"],it:["Metallo","Acqua","Legno","Fuoco","Terra"],es:["Metal","Agua","Madera","Fuego","Tierra"],ro:["Metal","Apă","Lemn","Foc","Pământ"],fr:["Métal","Eau","Bois","Feu","Terre"]};
+function getEL(i){return (EL_LANGS[LANG]||EL)[i];}
 const LOAD_MSGS=["Az ősök bölcsességét hívjuk elő…","A csillagtérkép forog…","Az elemek egyensúlyát mérjük…","Theodora Lau tanításait olvassuk…","A kozmikus kötelékek feltárulnak…","Az asztrológiai pillérek illeszkednek…","A sors szálai összefonódnak…"];
 
 function getAi(y,m){let yr=parseInt(y);if(parseInt(m)===1)yr--;return((yr-1900)%12+12)%12}
 function getEi(y){return Math.floor(((parseInt(y)-1900)%10+10)%10/2)}
 function getHa(h){const hi=parseInt(h);if(hi===23||hi===0)return HA[0];return HA[Math.ceil(hi/2)]}
 function scoreLbl(s){
-  if(s>=90)return{zh:"天作之合",hu:"Égi szövetség",c:"#C9A84C"};
-  if(s>=80)return{zh:"良緣佳配",hu:"Áldott kapcsolat",c:"#E8C97A"};
-  if(s>=70)return{zh:"相輔相成",hu:"Kiegészítő pár",c:"#E8C97A"};
-  if(s>=60)return{zh:"平和之緣",hu:"Kiegyensúlyozott viszony",c:"#FAF3E0"};
-  if(s>=50)return{zh:"需要努力",hu:"Kihívásokkal teli",c:"#F5C0A0"};
-  return{zh:"相沖相剋",hu:"Erős ellentét",c:"#F5A0A0"};
+  var lbls={
+    hu:["Égi szövetség","Áldott kapcsolat","Kiegészítő pár","Kiegyensúlyozott viszony","Kihívásokkal teli","Erős ellentét"],
+    en:["Heavenly Union","Blessed Bond","Complementary Pair","Balanced Relation","Challenging Path","Strong Opposition"],
+    de:["Himmlische Verbindung","Gesegnetes Band","Ergänzendes Paar","Ausgeglichene Beziehung","Herausfordernder Weg","Starker Gegensatz"],
+    it:["Unione Celeste","Legame Benedetto","Coppia Complementare","Relazione Equilibrata","Percorso Impegnativo","Forte Opposizione"],
+    es:["Unión Celestial","Vínculo Bendito","Pareja Complementaria","Relación Equilibrada","Camino Desafiante","Fuerte Oposición"],
+    ro:["Uniune Cerească","Legătură Binecuvântată","Pereche Complementară","Relație Echilibrată","Cale Provocatoare","Opoziție Puternică"],
+    fr:["Union Céleste","Lien Béni","Paire Complémentaire","Relation Équilibrée","Chemin Exigeant","Forte Opposition"],
+  };
+  var l=lbls[typeof LANG!=='undefined'?LANG:'hu']||lbls.hu;
+  if(s>=90)return{zh:"天作之合",hu:l[0],c:"#C9A84C"};
+  if(s>=80)return{zh:"良緣佳配",hu:l[1],c:"#E8C97A"};
+  if(s>=70)return{zh:"相輔相成",hu:l[2],c:"#E8C97A"};
+  if(s>=60)return{zh:"平和之緣",hu:l[3],c:"#FAF3E0"};
+  if(s>=50)return{zh:"需要努力",hu:l[4],c:"#F5C0A0"};
+  return{zh:"相沖相剋",hu:l[5],c:"#F5A0A0"};
 }
 
 
@@ -894,20 +910,23 @@ function calc(){
   const fn=document.getElementById('fn').value||'Ő';
   const mn=document.getElementById('mn').value||'Ő';
   STATE={fi,mi,fe,me,fha,mha,score,fn,mn};
-  document.getElementById('btn-f-label').textContent=fn+' elemzése';
-  document.getElementById('btn-m-label').textContent=mn+' elemzése';
+  var analysisTxt=LANG==='en'?'analysis':LANG==='de'?'Analyse':LANG==='it'?'analisi':LANG==='es'?'análisis':LANG==='ro'?'analiză':LANG==='fr'?'analyse':'elemzése';
+  document.getElementById('btn-f-label').textContent=fn+' '+analysisTxt;
+  document.getElementById('btn-m-label').textContent=mn+' '+analysisTxt;
 
   const lbl=scoreLbl(score);
   const fa=A[fi],ma=A[mi];
+  var faN2=window.ZA_LANGS&&window.ZA_LANGS[LANG]?window.ZA_LANGS[LANG].names[fi]:fa.n;
+  var maN2=window.ZA_LANGS&&window.ZA_LANGS[LANG]?window.ZA_LANGS[LANG].names[mi]:ma.n;
   document.getElementById('pair-row').innerHTML=
-    '<div class="pair-pill">'+fa.em+' <strong>'+fn+'</strong> · '+fa.n+'</div>'+
+    '<div class="pair-pill">'+fa.em+' <strong>'+fn+'</strong> · '+faN2+'</div>'+
     '<span class="pair-and">緣</span>'+
-    '<div class="pair-pill">'+ma.em+' <strong>'+mn+'</strong> · '+ma.n+'</div>';
+    '<div class="pair-pill">'+ma.em+' <strong>'+mn+'</strong> · '+maN2+'</div>';
   const zh=document.getElementById('score-zh');
   zh.textContent=lbl.zh;zh.style.color=lbl.c;
   document.getElementById('score-hu').textContent=lbl.hu;
-  document.getElementById('score-pct').textContent=score+'% kompatibilitás';
-  document.getElementById('score-sub').textContent=EL[fe]+' + '+EL[me]+' elem'+(fha&&mha?' · '+fha.zh+' '+fha.n+' & '+mha.zh+' '+mha.n:'');
+  document.getElementById('score-pct').textContent=score+'% '+(LANG==='en'?'compatibility':LANG==='de'?'Kompatibilität':LANG==='it'?'compatibilità':LANG==='es'?'compatibilidad':LANG==='ro'?'compatibilitate':LANG==='fr'?'compatibilité':'kompatibilitás');
+  document.getElementById('score-sub').textContent=getEL(fe)+' + '+getEL(me)+(LANG==='hu'?' elem':' element')+(fha&&mha?' · '+fha.zh+' '+(window.ZA_LANGS&&window.ZA_LANGS[LANG]?window.ZA_LANGS[LANG].names[fha.i]:fha.n)+' & '+mha.zh+' '+(window.ZA_LANGS&&window.ZA_LANGS[LANG]?window.ZA_LANGS[LANG].names[mha.i]:mha.n):'');
   document.getElementById('result').style.display='block';
   ['ar-f','ar-m','ar-c','ar-k','ar-r','ar-s'].forEach(id=>{const el=document.getElementById(id);el.style.display='none';el.innerHTML='';});
   ['btn-f','btn-m','btn-c','btn-k','btn-r','btn-s'].forEach(id=>document.getElementById(id).classList.remove('active'));
