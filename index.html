@@ -656,6 +656,19 @@ function applyTranslations(){
     });
     s.value=cur;
   });
+  // Hour selects - repopulate with translated names
+  ['fh','mh'].forEach(function(id){
+    var s=document.getElementById(id);if(!s)return;
+    var cur=s.value;
+    while(s.options.length>1)s.remove(1);
+    for(var h=0;h<24;h++){
+      var x=getHa(h);
+      var haN=x.n;
+      if(window.ZA_LANGS&&window.ZA_LANGS[LANG]&&window.ZA_LANGS[LANG].names)haN=window.ZA_LANGS[LANG].names[x.i];
+      var o=document.createElement('option');o.value=h;o.textContent=String(h).padStart(2,'0')+':00 '+x.zh+' '+haN;s.appendChild(o);
+    }
+    s.value=cur;
+  });
   // Calc button
   var cb=document.querySelector('.calc-btn');
   if(cb)cb.textContent=T.calcBtn;
@@ -825,7 +838,9 @@ const cy=new Date().getFullYear();
 });
 ['fh','mh'].forEach(id=>{
   const s=document.getElementById(id);
-  for(let h=0;h<24;h++){const x=getHa(h);const o=document.createElement('option');o.value=h;o.textContent=String(h).padStart(2,'0')+':00 '+x.zh+' '+x.n;s.appendChild(o)}
+  for(let h=0;h<24;h++){const x=getHa(h);const o=document.createElement('option');o.value=h;
+    var haN=x.n;try{var _ul=new URLSearchParams(window.location.search).get('lang');var _sl=_ul||localStorage.getItem('horoscope-lang')||'hu';if(window.ZA_LANGS&&window.ZA_LANGS[_sl]&&window.ZA_LANGS[_sl].names)haN=window.ZA_LANGS[_sl].names[x.i];}catch(e){}
+    o.textContent=String(h).padStart(2,'0')+':00 '+x.zh+' '+haN;s.appendChild(o)}
 });
 
 let STATE=null;
