@@ -624,10 +624,21 @@ function applyTranslations(){
   // Placeholders
   var fn=document.getElementById('fn');if(fn)fn.placeholder=T.namePh_f;
   var mn=document.getElementById('mn');if(mn)mn.placeholder=T.namePh_m;
-  // Year first option
+  // Year selects - repopulate with translated names
   ['fy','my'].forEach(function(id){
     var s=document.getElementById(id);
-    if(s&&s.options[0])s.options[0].text=T.yearPh;
+    if(!s)return;
+    var cur=s.value;
+    while(s.options.length>0)s.remove(0);
+    var o0=document.createElement('option');o0.value='';o0.text=T.yearPh;s.appendChild(o0);
+    var cy2=new Date().getFullYear();
+    for(var y=cy2;y>=1924;y--){
+      var i=getAi(y,6);
+      var aN=A[i].n;
+      if(ZA_LANGS&&ZA_LANGS[LANG]&&ZA_LANGS[LANG].names)aN=ZA_LANGS[LANG].names[i];
+      var o=document.createElement('option');o.value=y;o.textContent=y+' — '+aN;s.appendChild(o);
+    }
+    s.value=cur;
   });
   // Month selects - repopulate
   ['fmo','mmo'].forEach(function(id){
@@ -797,7 +808,9 @@ function scoreLbl(s){
 const cy=new Date().getFullYear();
 ['fy','my'].forEach(id=>{
   const s=document.getElementById(id);
-  for(let y=cy;y>=1924;y--){const i=getAi(y,6);const o=document.createElement('option');o.value=y;o.textContent=y+' — '+A[i].n;s.appendChild(o)}
+  for(let y=cy;y>=1924;y--){const i=getAi(y,6);const o=document.createElement('option');o.value=y;
+    var aN=A[i].n;try{var ul2=new URLSearchParams(window.location.search).get('lang');var sl2=ul2||localStorage.getItem('horoscope-lang')||'hu';if(ZA_LANGS&&ZA_LANGS[sl2]&&ZA_LANGS[sl2].names)aN=ZA_LANGS[sl2].names[i];}catch(e){}
+    o.textContent=y+' — '+aN;s.appendChild(o)}
 });
 ['fd','md'].forEach(id=>{
   const s=document.getElementById(id);
@@ -956,7 +969,11 @@ async function getAnalysis(type) {
     if(!parsed.sections||!Array.isArray(parsed.sections))throw new Error('Hiányzó sections mező.');
     const el=document.getElementById(arId);
     const titleColor=colors[type];
-    const titleText=type==='f'?'♀ '+fn+' — '+fa.n:type==='m'?'♂ '+mn+' — '+ma.n:'✦ '+fn+' & '+mn+' — Párkapcsolati elemzés';
+    var _zl=ZA_LANGS&&ZA_LANGS[LANG]?ZA_LANGS[LANG].names:null;
+    var faN=_zl?_zl[STATE.fi]:fa.n;
+    var maN=_zl?_zl[STATE.mi]:ma.n;
+    var coupleTitle=LANG==='hu'?'Párkapcsolati elemzés':LANG==='en'?'Relationship analysis':LANG==='de'?'Beziehungsanalyse':LANG==='it'?'Analisi di coppia':LANG==='es'?'Análisis de pareja':LANG==='ro'?'Analiza relației':'Analyse de couple';
+    const titleText=type==='f'?'♀ '+fn+' — '+faN:type==='m'?'♂ '+mn+' — '+maN:'✦ '+fn+' & '+mn+' — '+coupleTitle;
     let html='<div class="ar-title" style="color:'+titleColor+'">'+titleText+'</div>';
     parsed.sections.forEach(sec=>{
       html+='<div class="ar-sec"><div class="ar-sec-head"><span class="ar-sec-icon">'+sec.icon+'</span><span class="ar-sec-title">'+sec.title+'</span></div><div class="ar-sec-body">'+sec.body.replace(/\n/g,'<br>')+'</div></div>';
