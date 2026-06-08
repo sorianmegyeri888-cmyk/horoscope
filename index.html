@@ -323,7 +323,7 @@ window.closeZodiac=function(){
         <div class="person-icon icon-f">♀</div>
         <div class="person-title">Nő adatai</div>
       </div>
-      <div class="fg"><label class="fl" id="lbl-fn">Keresztnév</label><input class="fi" type="text" id="fn" placeholder="pl. Anna"></div>
+      <div class="fg"><label class="fl" id="lbl-fn" data-lbl="name">Keresztnév</label><input class="fi" type="text" id="fn" placeholder="pl. Anna"></div>
       <div class="fg"><label class="fl" data-lbl="year">Születési év</label><select class="fi" id="fy" onchange="upd()"><option value="">— Válassz évet —</option></select></div>
       <div class="row3">
         <div><label class="fl" data-lbl="month">Hónap</label>
@@ -346,7 +346,7 @@ window.closeZodiac=function(){
         <div class="person-icon icon-m">♂</div>
         <div class="person-title">Férfi adatai</div>
       </div>
-      <div class="fg"><label class="fl" id="lbl-mn">Keresztnév</label><input class="fi" type="text" id="mn" placeholder="pl. Péter"></div>
+      <div class="fg"><label class="fl" id="lbl-mn" data-lbl="name">Keresztnév</label><input class="fi" type="text" id="mn" placeholder="pl. Péter"></div>
       <div class="fg"><label class="fl" data-lbl="year">Születési év</label><select class="fi" id="my" onchange="upd()"><option value="">— Válassz évet —</option></select></div>
       <div class="row3">
         <div><label class="fl" data-lbl="month">Hónap</label>
@@ -648,6 +648,26 @@ function applyTranslations(){
   var wh=document.getElementById('wheel-hint');
   var wht={en:'Click on an animal sign for the description!',de:'Klicken Sie auf ein Tierzeichen!',it:'Clicca su un segno zodiacale!',es:'¡Haz clic en un signo animal!',ro:'Faceți clic pe un semn animal!',fr:'Cliquez sur un signe animal!'};
   if(wh&&wht[LANG])wh.textContent=wht[LANG];
+  // Translate zodiac wheel animal names
+  var animalNames={
+    en:['Rat','Ox','Tiger','Rabbit','Dragon','Snake','Horse','Goat','Monkey','Rooster','Dog','Pig'],
+    de:['Ratte','Ochse','Tiger','Hase','Drache','Schlange','Pferd','Ziege','Affe','Hahn','Hund','Schwein'],
+    it:['Ratto','Bue','Tigre','Coniglio','Drago','Serpente','Cavallo','Capra','Scimmia','Gallo','Cane','Maiale'],
+    es:['Rata','Buey','Tigre','Conejo','Dragón','Serpiente','Caballo','Cabra','Mono','Gallo','Perro','Cerdo'],
+    ro:['Șobolan','Bou','Tigru','Iepure','Dragon','Șarpe','Cal','Capră','Maimuță','Cocoș','Câine','Porc'],
+    fr:['Rat','Bœuf','Tigre','Lapin','Dragon','Serpent','Cheval','Chèvre','Singe','Coq','Chien','Cochon'],
+  };
+  if(animalNames[LANG]){
+    var svgEl=document.getElementById('zodiac-wheel');
+    if(svgEl){
+      var hu=['Patkány','Bika','Tigris','Nyúl','Sárkány','Kígyó','Ló','Kecske','Majom','Kakas','Kutya','Disznó'];
+      var texts=svgEl.querySelectorAll('text');
+      texts.forEach(function(t){
+        var idx2=hu.indexOf(t.textContent.trim());
+        if(idx2!==-1)t.textContent=animalNames[LANG][idx2];
+      });
+    }
+  }
   // Disclaimer
   var dp=document.getElementById('disclaimer-p');
   var dt={en:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Entertainment only</strong> — Astrology-based analysis for fun. Results depend on data completeness. Take it playfully! 🐉",de:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Zur Unterhaltung</strong> — Astrologiebasierte Analyse zum Spaß. 🐉",it:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo intrattenimento</strong> — Analisi basata sull\'astrologia per divertimento. 🐉",es:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo entretenimiento</strong> — Análisis basado en astrología por diversión. 🐉",ro:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Doar divertisment</strong> — Analiză bazată pe astrologie. 🐉",fr:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Divertissement uniquement</strong> — Analyse basée sur l\'astrologie. 🐉"};
