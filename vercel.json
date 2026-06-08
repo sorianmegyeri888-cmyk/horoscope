@@ -1,8 +1,5 @@
 {
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" }
-  ],
-  "redirects": [
-    { "source": "/", "destination": "/kezdolap.html", "permanent": false }
   ]
 }
