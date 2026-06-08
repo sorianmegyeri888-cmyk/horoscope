@@ -277,7 +277,12 @@ var ZA_LANGS={
   ro:{names:["Șobolan","Bou","Tigru","Iepure","Dragon","Șarpe","Cal","Capră","Maimuță","Cocoș","Câine","Porc"],el:["Apă","Pământ","Lemn","Lemn","Pământ","Foc","Foc","Pământ","Metal","Metal","Pământ","Apă"],descs:["Inteligent, ingenios si carismatic.","De incredere, rabdator si ferm.","Curajos, pasionat, cu autoritate naturala.","Rafinat, sensibil si diplomatic.","Cel mai norocos semn! Carisma radianta si energie nelimitata.","Intelept, profund si intuitiv.","Liber, energic si optimist.","Creativ, empatic si sensibil.","Spiritual, versatil si ingenios.","Precis, onest si increzator in sine.","Loial, drept si protector.","Generos, vesel si onest."]},
   fr:{names:["Rat","Bœuf","Tigre","Lapin","Dragon","Serpent","Cheval","Chèvre","Singe","Coq","Chien","Cochon"],el:["Eau","Terre","Bois","Bois","Terre","Feu","Feu","Terre","Métal","Métal","Terre","Eau"],descs:["Intelligent, ingénieux et charismatique.","Fiable, patient et ferme.","Courageux, passionné, avec une autorité naturelle.","Raffiné, sensible et diplomatique.","Le signe le plus chanceux! Charisme rayonnant et énergie illimitée.","Sage, profond et intuitif.","Libre, énergique et optimiste.","Créatif, empathique et sensible.","Spirituel, polyvalent et ingénieux.","Précis, honnête et confiant en soi.","Loyal, juste et protecteur.","Généreux, joyeux et honnête."]},
 };
-var ZA_DATA=ZA_LANGS[LANG]||null;
+var ZA_DATA=null;
+try{
+  var _u=new URLSearchParams(window.location.search).get('lang');
+  var _s=_u||localStorage.getItem('horoscope-lang')||'hu';
+  ZA_DATA=ZA_LANGS[_s]||null;
+}catch(e){ZA_DATA=null;}
 var ZA=[
   {n:ZA_DATA?ZA_DATA.names[0]:"Patkány",zh:"鼠",em:"🐀",el:ZA_DATA?ZA_DATA.el[0]:"Víz",sc:"#3a78c8",bc:"#5a98e8",desc:ZA_DATA?ZA_DATA.descs[0]:ZA_HU[0].desc},
   {n:ZA_DATA?ZA_DATA.names[1]:"Bika",zh:"牛",em:"🐂",el:ZA_DATA?ZA_DATA.el[1]:"Föld",sc:"#3a8a2a",bc:"#5aaa4a",desc:ZA_DATA?ZA_DATA.descs[1]:ZA_HU[1].desc},
