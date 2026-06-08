@@ -660,7 +660,10 @@ function applyTranslations(){
   var cb=document.querySelector('.calc-btn');
   if(cb)cb.textContent=T.calcBtn;
   // Preview
-  document.querySelectorAll('.preview').forEach(function(p){p.textContent=T.previewDefault;});
+  var fprev=document.getElementById('fprev');
+  var mprev=document.getElementById('mprev');
+  if(fprev)fprev.textContent=T.previewDefault;
+  if(mprev)mprev.textContent=T.previewDefault;
   // Analysis buttons
   var bf=document.getElementById('btn-f-label');if(bf)bf.textContent=T.btn_f;
   var bm=document.getElementById('btn-m-label');if(bm)bm.textContent=T.btn_m;
