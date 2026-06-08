@@ -1098,6 +1098,7 @@ setTimeout(animateCounter, 800);
 
 // Init
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('LANG:', LANG, 'URL:', window.location.search, 'LS:', localStorage.getItem('horoscope-lang'));
   applyTranslations();
   addLangSwitcher();
   upd();
