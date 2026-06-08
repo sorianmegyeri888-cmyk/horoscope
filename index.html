@@ -836,7 +836,7 @@ function upd(){
     const mo=document.getElementById(p+'mo').value;
     const h=document.getElementById(p+'h').value;
     const pv=document.getElementById(pid);
-    if(!y||!mo){pv.textContent='Add meg az adatokat…';return}
+    if(!y||!mo){pv.textContent=(typeof T!=='undefined'&&T.previewDefault)?T.previewDefault:'Enter your details…';return}
     const ai=getAi(y,mo);const ei=getEi(y);
     document.querySelectorAll('.acard').forEach(c=>{c.classList.remove('sel-f','sel-m')});
     if(document.getElementById('fy').value&&document.getElementById('fmo').value){
