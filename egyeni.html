@@ -171,7 +171,12 @@ var LANGS={
   fr:{title:"Analyse du Destin Personnel —",subtitle:"qu'est-ce qui est écrit pour vous?",tagline:"Basé sur le système d'astrologie chinoise de Theodora Lau",modePair:"✦ J'ai un partenaire",modeSingle:"🌙 Je suis célibataire",formTitle:"Entrez vos données de naissance",nameLbl:"Prénom",yearLbl:"Année de naissance",monthLbl:"Mois",dayLbl:"Jour",hourLbl:"Heure (Lau)",namePh_f:"ex. Anne",namePh_m:"ex. Pierre",yearPh:"— Sélectionner l'année —",calcBtn:"🌙 Révéler mon destin",previewDefault:"Entrez vos données…",btn_p:"♀♂ Analyse personnelle",btn_k:"💼 Carrière & argent",btn_r:"☯️ Karma",btn_s:"🔮 Prochaines 12 années",btn_w:"💕 Qui me correspond?",pdfBtn:"📄 Télécharger le Rapport du Destin Personnel",promptLang:"EN FRANÇAIS",months:["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],flagBtn:"🇫🇷 Langue",genderF:"♀ Femme",genderM:"♂ Homme"},
 };
 
-function getLang(){var u=new URLSearchParams(window.location.search).get('lang');if(u&&LANGS[u]){localStorage.setItem('horoscope-lang',u);return u;}var s=localStorage.getItem('horoscope-lang');if(s&&LANGS[s])return s;return 'hu';}
+function getLang(){
+  var u=new URLSearchParams(window.location.search).get('lang');
+  if(u&&LANGS[u]){try{localStorage.setItem('horoscope-lang',u);}catch(e){}return u;}
+  try{var s=localStorage.getItem('horoscope-lang');if(s&&LANGS[s])return s;}catch(e){}
+  return 'hu';
+}
 var LANG=getLang();
 var T=LANGS[LANG];
 
