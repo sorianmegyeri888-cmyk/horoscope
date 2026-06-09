@@ -572,7 +572,7 @@ window.closeZodiac=function(){
 
 <script>
 // NYELVI RENDSZER
-const LANGS = {
+var LANGS = {
   hu:{disc_short:"Szórakoztató célú elemzés — hiányos adatok esetén csak tájékoztató jellegű. Vedd játékosan!",analyzing:"Elemzés folyamatban…",analyzing_hint:"Ez eltart kb. 10–20 másodpercet",survey_title:"✦ Mennyire voltál elégedett az elemzéssel?",survey_email_lbl:"Email cím (opcionális) — küldjük el PDF-ben",survey_comment_lbl:"Megjegyzés (opcionális)",survey_comment_ph:"Írd le tapasztalatod...",survey_btn:"✦ Visszajelzés küldése",title:"Kiderül, ő az igazi?",subtitle:"A sors már születésedkor megírta.",tagline:"Theodora Lau 5000 éves kínai asztrológiai rendszere alapján",modePair:"✦ Van párom",modeSingle:"🌙 Nincs párom",formTitle:"Add meg a születési adatokat",femaleTitle:"Nő adatai",maleTitle:"Férfi adatai",nameLbl:"Keresztnév",yearLbl:"Születési év",monthLbl:"Hónap",dayLbl:"Nap",hourLbl:"Óra (Lau)",namePh_f:"pl. Anna",namePh_m:"pl. Péter",yearPh:"— Válassz évet —",calcBtn:"✦ Megnézem a sorsunkat ✦",previewDefault:"Add meg az adatokat…",btn_f:"♀ Nő elemzése",btn_m:"♂ Férfi elemzése",btn_c:"✦ Tartós-e a kapcsolatunk?",btn_k:"💼 Karrier & pénz sorsunk",btn_r:"☯️ Karma & múltbeli kötelék",btn_s:"🔮 Mit hoz a következő 12 év?",pdfBtn:"📄 Prémium Sors Jelentés letöltése",surveyTitle:"✦ Mennyire voltál elégedett az elemzéssel?",surveyBtn:"✦ Visszajelzés küldése",surveyThanks:"Köszönjük a visszajelzésedet! 🙏",promptLang:"MAGYARUL",months:["Január","Február","Március","Április","Május","Június","Július","Augusztus","Szeptember","Október","November","December"],flagBtn:"🇭🇺 Nyelv"},
   en:{disc_short:"Entertainment only — results depend on data completeness. Take it playfully!",analyzing:"Analysis in progress…",analyzing_hint:"This takes about 10-20 seconds",survey_title:"✦ How satisfied were you with the analysis?",survey_email_lbl:"Email address (optional) — send me the PDF",survey_comment_lbl:"Comment (optional)",survey_comment_ph:"Share your experience...",survey_btn:"✦ Send feedback",title:"Is they the one?",subtitle:"Your destiny was written at birth.",tagline:"Based on Theodora Lau's 5000-year Chinese Astrology system",modePair:"✦ I have a partner",modeSingle:"🌙 I'm single",formTitle:"Enter your birth details",femaleTitle:"Woman's details",maleTitle:"Man's details",nameLbl:"First name",yearLbl:"Birth year",monthLbl:"Month",dayLbl:"Day",hourLbl:"Hour (Lau)",namePh_f:"e.g. Anna",namePh_m:"e.g. Peter",yearPh:"— Select year —",calcBtn:"✦ Reveal our destiny ✦",previewDefault:"Enter your details…",btn_f:"♀ Woman's analysis",btn_m:"♂ Man's analysis",btn_c:"✦ Is our love lasting?",btn_k:"💼 Career & money destiny",btn_r:"☯️ Karma & past patterns",btn_s:"🔮 Next 12 years forecast",pdfBtn:"📄 Download Premium Fate Report",surveyTitle:"✦ How satisfied were you?",surveyBtn:"✦ Send feedback",surveyThanks:"Thank you for your feedback! 🙏",promptLang:"IN ENGLISH",months:["January","February","March","April","May","June","July","August","September","October","November","December"],flagBtn:"🇬🇧 Language"},
   de:{disc_short:"Nur zur Unterhaltung — Ergebnisse hängen von der Datenvollständigkeit ab.",analyzing:"Analyse läuft…",analyzing_hint:"Dies dauert etwa 10-20 Sekunden",survey_title:"✦ Wie zufrieden waren Sie mit der Analyse?",survey_email_lbl:"E-Mail (optional)",survey_comment_lbl:"Kommentar (optional)",survey_comment_ph:"Teilen Sie Ihre Erfahrung...",survey_btn:"✦ Feedback senden",title:"Ist es die Richtige?",subtitle:"Dein Schicksal wurde bei der Geburt geschrieben.",tagline:"Basierend auf Theodora Laus 5000-jährigem chinesischen Astrologie-System",modePair:"✦ Ich habe einen Partner",modeSingle:"🌙 Ich bin Single",formTitle:"Geburtsdaten eingeben",femaleTitle:"Daten der Frau",maleTitle:"Daten des Mannes",nameLbl:"Vorname",yearLbl:"Geburtsjahr",monthLbl:"Monat",dayLbl:"Tag",hourLbl:"Stunde (Lau)",namePh_f:"z.B. Anna",namePh_m:"z.B. Peter",yearPh:"— Jahr wählen —",calcBtn:"✦ Unser Schicksal enthüllen ✦",previewDefault:"Daten eingeben…",btn_f:"♀ Analyse der Frau",btn_m:"♂ Analyse des Mannes",btn_c:"✦ Ist unsere Liebe dauerhaft?",btn_k:"💼 Karriere & Geld Schicksal",btn_r:"☯️ Karma & vergangene Muster",btn_s:"🔮 Nächste 12 Jahre Vorhersage",pdfBtn:"📄 Premium Schicksalsbericht herunterladen",surveyTitle:"✦ Wie zufrieden waren Sie?",surveyBtn:"✦ Feedback senden",surveyThanks:"Vielen Dank für Ihr Feedback! 🙏",promptLang:"AUF DEUTSCH",months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],flagBtn:"🇩🇪 Sprache"},
@@ -981,4 +981,200 @@ function getSecTitles(type) {
   var arr=(titles[type]&&(titles[type][lang]||titles[type].hu))||[];
   return arr.map(function(s){return {icon:s[0],title:s[1],body:bi};});
 }
->
+
+async function getAnalysis(type) {
+  if(!STATE)return;
+  document.getElementById('errmsg').textContent='';
+  const colors={f:'#F5A0A0',m:'#9ab8f5',c:'#E8C97A',k:'#a8d8a8',r:'#c8a8e8',s:'#a8c8e8'};
+  const arId='ar-'+type;
+  ['btn-f','btn-m','btn-c','btn-k','btn-r','btn-s'].forEach(id=>document.getElementById(id).classList.remove('active'));
+  document.getElementById('btn-'+type).classList.add('active');
+  ['ar-f','ar-m','ar-c','ar-k','ar-r','ar-s'].forEach(id=>{if(id!==arId){document.getElementById(id).style.display='none';document.getElementById(id).innerHTML=''}});
+  const {fi,mi,fe,me,fha,mha,score,fn,mn}=STATE;
+  const fa=A[fi],ma=A[mi];
+  const faN=window.ZA_LANGS&&window.ZA_LANGS[LANG]?window.ZA_LANGS[LANG].names[fi]:fa.n;
+  const maN=window.ZA_LANGS&&window.ZA_LANGS[LANG]?window.ZA_LANGS[LANG].names[mi]:ma.n;
+  let prompt='';
+  const langInstr=T?T.promptLang:'MAGYARUL';
+
+  if(type==='f'){
+    prompt='Based on Theodora Lau The Handbook of Chinese Horoscopes, provide a detailed personal analysis '+langInstr+'.\n'+
+      'Person: '+fn+', zodiac: '+fa.n+' ('+fa.zh+'), element: '+EL[fe]+', year: '+document.getElementById('fy').value+
+      (fha?', hour sign: '+fha.n+' ('+fha.r+')':'')+'.\n'+
+      'ONLY JSON: '+JSON.stringify({sections:getSecTitles("f")});
+  } else if(type==='m'){
+    prompt='Based on Theodora Lau The Handbook of Chinese Horoscopes, provide a detailed personal analysis '+langInstr+'.\n'+
+      'Person: '+mn+', zodiac: '+ma.n+' ('+ma.zh+'), element: '+EL[me]+', year: '+document.getElementById('my').value+
+      (mha?', hour sign: '+mha.n+' ('+mha.r+')':'')+'.\n'+
+      'ONLY JSON: '+JSON.stringify({sections:getSecTitles("f")});
+  } else if(type==='c'){
+    prompt='Based on Theodora Lau The Handbook of Chinese Horoscopes, provide a detailed relationship analysis '+langInstr+'.\n'+
+      'Woman: '+fn+', '+fa.n+' ('+fa.zh+'), '+EL[fe]+' element.\n'+
+      'Man: '+mn+', '+ma.n+' ('+ma.zh+'), '+EL[me]+' element.\n'+
+      'Compatibility: '+score+'%.\n'+(fha&&mha?'Hour signs: '+fha.n+' & '+mha.n+'.\n':'')+
+      'ONLY JSON: '+JSON.stringify({sections:getSecTitles("c")});
+  } else if(type==='k'){
+    prompt='Based on Chinese astrology, provide a detailed career and financial analysis '+langInstr+'.\n'+
+      'Person: '+fn+' and '+mn+', zodiacs: '+fa.n+' ('+EL[fe]+') and '+ma.n+' ('+EL[me]+').\n'+
+      'ONLY JSON: '+JSON.stringify({sections:getSecTitles("k")});
+  } else if(type==='r'){
+    prompt='Based on Chinese astrology karma teachings, provide a deep karma analysis '+langInstr+'.\n'+
+      'Person: '+fn+' and '+mn+', zodiacs: '+fa.n+' ('+EL[fe]+') and '+ma.n+' ('+EL[me]+').\n'+
+      'ONLY JSON: '+JSON.stringify({sections:getSecTitles("r")});
+  } else if(type==='s'){
+    prompt='Based on Chinese astrology 12-year cycles, provide a detailed destiny forecast '+langInstr+'.\n'+
+      'Person: '+fn+' and '+mn+', zodiacs: '+fa.n+' ('+EL[fe]+', '+document.getElementById('fy').value+') and '+ma.n+' ('+EL[me]+', '+document.getElementById('my').value+').\n'+
+      'ONLY JSON: '+JSON.stringify({sections:getSecTitles("s")});
+  }
+
+  const timer=startProgress(arId,colors[type]);
+  try {
+    const resp=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+    clearInterval(timer);
+    if(!resp.ok){const t=await resp.json().catch(()=>({}));throw new Error(t.error||'Server error '+resp.status)}
+    const parsed=await resp.json();
+    if(!parsed.sections||!Array.isArray(parsed.sections))throw new Error('Missing sections field.');
+    const el=document.getElementById(arId);
+    const faN2=window.ZA_LANGS&&window.ZA_LANGS[LANG]?window.ZA_LANGS[LANG].names[fi]:fa.n;
+    const maN2=window.ZA_LANGS&&window.ZA_LANGS[LANG]?window.ZA_LANGS[LANG].names[mi]:ma.n;
+    const coupleTitle=T&&T.btn_c?T.btn_c:'Relationship analysis';
+    const titles={f:'♀ '+fn+' — '+faN2,m:'♂ '+mn+' — '+maN2,c:'✦ '+fn+' & '+mn+' — '+coupleTitle,k:'💼 '+fn+' & '+mn,r:'☯️ '+fn+' & '+mn,s:'🔮 '+fn+' & '+mn};
+    const titleColor=colors[type];
+    let html='<div class="ar-title" style="color:'+titleColor+'">'+titles[type]+'</div>';
+    parsed.sections.forEach(sec=>{
+      html+='<div class="ar-sec"><div class="ar-sec-head"><span class="ar-sec-icon">'+sec.icon+'</span><span class="ar-sec-title">'+sec.title+'</span></div><div class="ar-sec-body">'+sec.body.replace(/\n/g,'<br>')+'</div></div>';
+    });
+    html+='<div class="ar-footer">Theodora Lau · The Handbook of Chinese Horoscopes · GPT-4o-mini</div>';
+    html+='<div style="text-align:center;margin-top:8px;font-size:11px;color:rgba(250,243,224,.3);font-style:italic">✨ '+(T&&T.disc_short?T.disc_short:'Entertainment only — take it playfully!')+'</div>';
+    el.innerHTML=html;
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    showPdfBtn();
+  } catch(e) {
+    clearInterval(timer);
+    const el=document.getElementById(arId);
+    el.innerHTML='<div style="color:#F5A0A0;padding:14px;font-size:13px">⚠ '+e.message+'<br><span style="font-size:11px;opacity:.7">Please try again.</span></div>';
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+
+function showPdfBtn(){
+  const has=['ar-f','ar-m','ar-c','ar-k','ar-r','ar-s'].some(id=>{const el=document.getElementById(id);return el&&el.style.display!=='none'&&el.innerHTML.trim().length>0;});
+  document.getElementById('pdf-btn').style.display=has?'block':'none';
+  document.getElementById('survey-box').style.display=has?'block':'none';
+}
+
+function downloadPDF(){
+  if(!STATE)return;
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const {fi,mi,fe,me,fha,mha,score,fn,mn}=STATE;
+  const fa=A[fi],ma=A[mi];
+  const pageW=doc.internal.pageSize.getWidth();
+  let y=20;
+  const center=(text,yPos,size=12,style='normal')=>{doc.setFontSize(size);doc.setFont('helvetica',style);doc.text(text,pageW/2,yPos,{align:'center'});};
+  const line=(yPos)=>{doc.setDrawColor(180,150,60);doc.setLineWidth(0.3);doc.line(20,yPos,pageW-20,yPos);};
+  doc.setFillColor(13,10,46);doc.rect(0,0,pageW,297,'F');
+  doc.setTextColor(196,30,58);center('龍 鳳 緣',y,28,'bold');y+=10;
+  doc.setTextColor(201,168,76);center('FATE REPORT',y,10);y+=8;
+  line(y);y+=8;
+  doc.setTextColor(232,201,122);center(fn+' & '+mn,y,14,'bold');y+=8;
+  doc.setTextColor(201,168,76);center(fa.n+' + '+ma.n+' · '+score+'% compatibility',y,11);y+=10;
+  line(y);y+=10;
+  const panels=['ar-f','ar-m','ar-c','ar-k','ar-r','ar-s'];
+  const ptitles=[fn+' — '+fa.n,mn+' — '+ma.n,fn+' & '+mn+' — Relationship',fn+' & '+mn+' — Career',fn+' & '+mn+' — Karma',fn+' & '+mn+' — 12 Years'];
+  panels.forEach((id,idx)=>{
+    const el=document.getElementById(id);
+    if(!el||el.style.display==='none'||!el.innerHTML.trim())return;
+    if(y>250){doc.addPage();doc.setFillColor(13,10,46);doc.rect(0,0,pageW,297,'F');y=20;}
+    doc.setTextColor(196,30,58);doc.setFontSize(12);doc.setFont('helvetica','bold');doc.text(ptitles[idx],20,y);y+=6;
+    line(y);y+=6;
+    const secs=el.querySelectorAll('.ar-sec');
+    secs.forEach(sec=>{
+      const title=sec.querySelector('.ar-sec-title');
+      const body=sec.querySelector('.ar-sec-body');
+      if(!title||!body)return;
+      if(y>260){doc.addPage();doc.setFillColor(13,10,46);doc.rect(0,0,pageW,297,'F');y=20;}
+      doc.setTextColor(232,201,122);doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text(title.textContent,20,y);y+=5;
+      doc.setTextColor(200,180,140);doc.setFontSize(9);doc.setFont('helvetica','normal');
+      const lines=doc.splitTextToSize(body.textContent.trim(),pageW-40);
+      lines.forEach(ln=>{if(y>280){doc.addPage();doc.setFillColor(13,10,46);doc.rect(0,0,pageW,297,'F');y=20;}doc.text(ln,20,y);y+=4.5;});
+      y+=4;
+    });y+=6;
+  });
+  line(280);
+  doc.setTextColor(120,100,60);doc.setFontSize(8);
+  doc.text('Theodora Lau · The Handbook of Chinese Horoscopes',pageW/2,286,{align:'center'});
+  doc.text('龍鳳緣 · Siker-SM Kft. · '+new Date().toLocaleDateString(),pageW/2,291,{align:'center'});
+  doc.save('fate-report-'+fn+'-'+mn+'.pdf');
+}
+
+// Survey
+let selectedRating=0;
+function setRating(n){
+  selectedRating=n;
+  for(let i=1;i<=10;i++){
+    const btn=document.getElementById('rate-'+i);
+    if(btn){
+      btn.style.background=i<=n?'rgba(150,120,220,.4)':'transparent';
+      btn.style.borderColor=i<=n?'rgba(150,120,220,.8)':'rgba(150,120,220,.3)';
+      btn.style.color=i<=n?'#FAF3E0':'rgba(250,243,224,.6)';
+    }
+  }
+}
+
+async function submitSurvey(){
+  const email=document.getElementById('survey-email').value;
+  const comment=document.getElementById('survey-comment').value;
+  if(!selectedRating){alert('Please give a rating 1-10!');return;}
+  const btn=document.querySelector('[onclick="submitSurvey()"]');
+  if(btn){btn.textContent='⏳ Sending...';btn.disabled=true;}
+  try{
+    const resp=await fetch('https://formspree.io/f/xzdkajda',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:email||'not provided',rating:selectedRating+'/10',comment:comment||'no comment',date:new Date().toLocaleString()})});
+    if(resp.ok){
+      document.getElementById('survey-thanks').style.display='block';
+      document.getElementById('survey-box').style.pointerEvents='none';
+      document.getElementById('survey-box').style.opacity='0.7';
+      if(btn){btn.textContent='✓ Sent!';btn.style.color='#a8d8a8';btn.disabled=false;}
+      document.getElementById('survey-email').value='';
+      document.getElementById('survey-comment').value='';
+      selectedRating=0;
+      for(let i=1;i<=10;i++){const b=document.getElementById('rate-'+i);if(b){b.style.background='transparent';b.style.borderColor='rgba(150,120,220,.3)';b.style.color='rgba(250,243,224,.6)';}}
+    }
+  }catch(e){if(btn){btn.textContent=T&&T.survey_btn?T.survey_btn:'Send feedback';btn.disabled=false;}}
+}
+
+function showTab(name){
+  ['impresszum','adatkezeles','felhasznalasi','cookie'].forEach(t=>{
+    document.getElementById('tab-'+t+'-content').style.display=t===name?'block':'none';
+    const btn=document.getElementById('tab-'+t);
+    btn.classList.toggle('active-tab',t===name);
+  });
+}
+
+function acceptCookies(){
+  localStorage.setItem('cookies-accepted','1');
+  document.getElementById('cookie-banner').style.display='none';
+}
+if(!localStorage.getItem('cookies-accepted')){
+  document.getElementById('cookie-banner').style.display='flex';
+}
+
+// Counter animation
+function animateCounter(){
+  const el=document.getElementById('counter');
+  if(!el)return;
+  const target=12847;const start=target-50;let current=start;
+  const timer=setInterval(()=>{current+=1;el.textContent=current.toLocaleString('hu-HU');if(current>=target)clearInterval(timer);},60);
+}
+setTimeout(animateCounter,800);
+
+// INIT - runs after DOM is ready
+document.addEventListener('DOMContentLoaded',function(){
+  applyTranslations();
+  addLangSwitcher();
+  upd();
+});
+
+</script>
+</body>
+</html>
