@@ -992,35 +992,35 @@ async function getAnalysis(type) {
       'Személy: '+fn+', állatjegy: '+fa.n+' ('+fa.zh+'), elem: '+EL[fe]+', év: '+document.getElementById('fy').value+
       (fha?', órajegy: '+fha.n+' ('+fha.r+')':'')+'.\n'+
       'CSAK JSON, pontosan 4 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('f')})+';
+      '+JSON.stringify({sections:getSecTitles("f")})+';
   } else if(type==='m'){
     prompt='Theodora Lau The Handbook of Chinese Horoscopes szellemében adj részletes személyes elemzést '+T.promptLang+'.\n'+
       'Személy: '+mn+', állatjegy: '+ma.n+' ('+ma.zh+'), elem: '+EL[me]+', év: '+document.getElementById('my').value+
       (mha?', órajegy: '+mha.n+' ('+mha.r+')':'')+'.\n'+
       'CSAK JSON, pontosan 4 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('f')})+';
+      '+JSON.stringify({sections:getSecTitles("f")})+';
   } else if(type==='c') {
     prompt='Theodora Lau The Handbook of Chinese Horoscopes szellemében adj részletes párkapcsolati elemzést '+T.promptLang+'.\n'+
       'Nő: '+fn+', '+fa.n+' ('+fa.zh+'), '+EL[fe]+' elem.\n'+
       'Férfi: '+mn+', '+ma.n+' ('+ma.zh+'), '+EL[me]+' elem.\n'+
       'Kompatibilitás: '+score+'%.\n'+(fha&&mha?'Órajegyek: '+fha.n+' & '+mha.n+'.\n':'')+
       'CSAK JSON, pontosan 5 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('c')})+';
+      '+JSON.stringify({sections:getSecTitles("c")})+';
   } else if(type==='k') {
     prompt='Theodora Lau The Handbook of Chinese Horoscopes és a kínai asztrológia alapján adj részletes karrier és pénzügyi elemzést '+T.promptLang+'.\n'+
       'Személy: '+fn+' és '+mn+', állatjegyek: '+fa.n+' ('+EL[fe]+' elem) és '+ma.n+' ('+EL[me]+' elem).\n'+
       'CSAK JSON, pontosan 4 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('k')})+';
+      '+JSON.stringify({sections:getSecTitles("k")})+';
   } else if(type==='r') {
     prompt='A kínai asztrológia és karma tanítások alapján adj mély karma elemzést '+T.promptLang+'.\n'+
       'Személy: '+fn+' és '+mn+', állatjegyek: '+fa.n+' ('+EL[fe]+' elem) és '+ma.n+' ('+EL[me]+' elem).\n'+
       'CSAK JSON, pontosan 4 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('r')})+';
+      '+JSON.stringify({sections:getSecTitles("r")})+';
   } else if(type==='s') {
     prompt='A kínai asztrológia 12 éves ciklusai alapján adj részletes egyéni sors előrevetítést '+T.promptLang+'.\n'+
       'Személy: '+fn+' és '+mn+', állatjegyek: '+fa.n+' ('+EL[fe]+' elem, '+document.getElementById('fy').value+') és '+ma.n+' ('+EL[me]+' elem, '+document.getElementById('my').value+').\n'+
       'CSAK JSON, pontosan 4 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('s')})+';
+      '+JSON.stringify({sections:getSecTitles("s")})+';
   }
 
   try {
@@ -1296,35 +1296,35 @@ async function getAnalysis(type) {
       'Személy: '+fn+', állatjegy: '+fa.n+' ('+fa.zh+'), elem: '+EL[fe]+', év: '+document.getElementById('fy').value+
       (fha?', órajegy: '+fha.n+' ('+fha.r+')':'')+'.\n'+
       'CSAK JSON, pontosan 4 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('f')})+';
+      '+JSON.stringify({sections:getSecTitles("f")})+';
   } else if(type==='m'){
     prompt='Theodora Lau The Handbook of Chinese Horoscopes szellemében adj részletes személyes elemzést '+T.promptLang+'.\n'+
       'Személy: '+mn+', állatjegy: '+ma.n+' ('+ma.zh+'), elem: '+EL[me]+', év: '+document.getElementById('my').value+
       (mha?', órajegy: '+mha.n+' ('+mha.r+')':'')+'.\n'+
       'CSAK JSON, pontosan 4 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('f')})+';
+      '+JSON.stringify({sections:getSecTitles("f")})+';
   } else if(type==='c') {
     prompt='Theodora Lau The Handbook of Chinese Horoscopes szellemében adj részletes párkapcsolati elemzést '+T.promptLang+'.\n'+
       'Nő: '+fn+', '+fa.n+' ('+fa.zh+'), '+EL[fe]+' elem.\n'+
       'Férfi: '+mn+', '+ma.n+' ('+ma.zh+'), '+EL[me]+' elem.\n'+
       'Kompatibilitás: '+score+'%.\n'+(fha&&mha?'Órajegyek: '+fha.n+' & '+mha.n+'.\n':'')+
       'CSAK JSON, pontosan 5 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('c')})+';
+      '+JSON.stringify({sections:getSecTitles("c")})+';
   } else if(type==='k') {
     prompt='Theodora Lau The Handbook of Chinese Horoscopes és a kínai asztrológia alapján adj részletes karrier és pénzügyi elemzést '+T.promptLang+'.\n'+
       'Személy: '+fn+' és '+mn+', állatjegyek: '+fa.n+' ('+EL[fe]+' elem) és '+ma.n+' ('+EL[me]+' elem).\n'+
       'CSAK JSON, pontosan 4 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('k')})+';
+      '+JSON.stringify({sections:getSecTitles("k")})+';
   } else if(type==='r') {
     prompt='A kínai asztrológia és karma tanítások alapján adj mély karma elemzést '+T.promptLang+'.\n'+
       'Személy: '+fn+' és '+mn+', állatjegyek: '+fa.n+' ('+EL[fe]+' elem) és '+ma.n+' ('+EL[me]+' elem).\n'+
       'CSAK JSON, pontosan 4 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('r')})+';
+      '+JSON.stringify({sections:getSecTitles("r")})+';
   } else if(type==='s') {
     prompt='A kínai asztrológia 12 éves ciklusai alapján adj részletes egyéni sors előrevetítést '+T.promptLang+'.\n'+
       'Személy: '+fn+' és '+mn+', állatjegyek: '+fa.n+' ('+EL[fe]+' elem, '+document.getElementById('fy').value+') és '+ma.n+' ('+EL[me]+' elem, '+document.getElementById('my').value+').\n'+
       'CSAK JSON, pontosan 4 szakasz:\n'+
-      '+JSON.stringify({sections:getSecTitles('s')})+';
+      '+JSON.stringify({sections:getSecTitles("s")})+';
   }
 
   try {
