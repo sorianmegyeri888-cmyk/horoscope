@@ -585,10 +585,9 @@ var LANGS = {
 function getLang(){
   // 1. Check URL parameter
   var u=new URLSearchParams(window.location.search).get('lang');
-  if(u&&LANGS[u]){localStorage.setItem('horoscope-lang',u);return u;}
-  // 2. Check localStorage
-  var s=localStorage.getItem('horoscope-lang');
-  if(s&&LANGS[s])return s;
+  if(u&&LANGS[u]){try{localStorage.setItem('horoscope-lang',u);}catch(e){}return u;}
+  // 2. Check localStorage (may be blocked by tracking prevention)
+  try{var s=localStorage.getItem('horoscope-lang');if(s&&LANGS[s])return s;}catch(e){}
   // 3. No language set - redirect to language picker
   window.location.href='kezdolap.html';
   return 'hu';
@@ -954,7 +953,7 @@ function startProgress(elId, color) {
     if(bar)bar.style.width=r+'%';
     if(ppct)ppct.textContent=r+'%';
     msgIdx=Math.min(Math.floor((r/100)*LOAD_MSGS.length),LOAD_MSGS.length-1);
-    if(pmsg)pmsg.textContent=LOAD_MSGS[msgIdx];
+    if(pmsg)pmsg.textContent=(window.LOAD_MSGS||LOAD_MSGS)[msgIdx]||'';
   },350);
   return timer;
 }
