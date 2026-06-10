@@ -242,13 +242,13 @@ function applyTranslationsE(){
   if(hookP&&hookTexts[LANG])hookP.innerHTML=hookTexts[LANG];
   // Disclaimer
   var discTexts={
-    hu:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Szórakoztató tartalom</strong> — Asztrológiai hagyományokon alapuló elemzés. Hiányos adatok esetén csak tájékoztató jellegű. Vedd játékosan! 🐉",
-    en:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Entertainment only</strong> — Astrology-based analysis for fun. Results depend on data completeness. Take it playfully! 🐉",
-    de:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Zur Unterhaltung</strong> — Astrologiebasierte Analyse zum Spaß. Ergebnisse hängen von der Datenvollständigkeit ab. 🐉",
-    it:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo intrattenimento</strong> — Analisi basata sull'astrologia per divertimento. 🐉",
-    es:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Solo entretenimiento</strong> — Análisis basado en astrología por diversión. 🐉",
-    ro:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Doar divertisment</strong> — Analiză bazată pe astrologie pentru distracție. 🐉",
-    fr:"✨ <strong style='color:rgba(201,168,76,.7);font-style:normal'>Divertissement uniquement</strong> — Analyse basée sur l'astrologie pour le plaisir. 🐉",
+    hu:"✨ <strong style=\"color:rgba(201,168,76,.7);font-style:normal\">Szórakoztató tartalom</strong> — Asztrológiai hagyományokon alapuló elemzés. Hiányos adatok esetén csak tájékoztató jellegű. Vedd játékosan! 🐉",
+    en:"✨ <strong style=\"color:rgba(201,168,76,.7);font-style:normal\">Entertainment only</strong> — Astrology-based analysis for fun. Results depend on data completeness. Take it playfully! 🐉",
+    de:"✨ <strong style=\"color:rgba(201,168,76,.7);font-style:normal\">Zur Unterhaltung</strong> — Astrologiebasierte Analyse zum Spaß. Ergebnisse hängen von der Datenvollständigkeit ab. 🐉",
+    it:"✨ <strong style=\"color:rgba(201,168,76,.7);font-style:normal\">Solo intrattenimento</strong> — Analisi basata sull'astrologia. 🐉",
+    es:"✨ <strong style=\"color:rgba(201,168,76,.7);font-style:normal\">Solo entretenimiento</strong> — Análisis basado en astrología por diversión. 🐉",
+    ro:"✨ <strong style=\"color:rgba(201,168,76,.7);font-style:normal\">Doar divertisment</strong> — Analiză bazată pe astrologie pentru distracție. 🐉",
+    fr:"✨ <strong style=\"color:rgba(201,168,76,.7);font-style:normal\">Divertissement uniquement</strong> — Analyse basée sur l'astrologie. 🐉",
   };
   document.querySelectorAll('p').forEach(function(p){
     if(p.textContent&&p.textContent.indexOf('Szórakoztató')!==-1&&discTexts[LANG])p.innerHTML=discTexts[LANG];
