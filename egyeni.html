@@ -259,7 +259,7 @@ function applyTranslationsE(){
     if(el.children.length===0&&el.textContent.trim()==='Kattints egy állatjegyre a leíráshoz!'&&wheelHints[LANG])el.textContent=wheelHints[LANG];
   });
   // Back link
-  var backLinks={hu:'← Vissza a párkapcsolati elemzéshez',en:'← Back to relationship analysis',de:'← Zurück zur Beziehungsanalyse',it:'← Torna all'analisi di coppia',es:'← Volver al análisis de pareja',ro:'← Înapoi la analiza relației',fr:'← Retour à l'analyse de couple'};
+  var backLinks={hu:"← Vissza a párkapcsolati elemzéshez",en:"← Back to relationship analysis",de:"← Zurück zur Beziehungsanalyse",it:"← Torna all'analisi di coppia",es:"← Volver al análisis de pareja",ro:"← Înapoi la analiza relației",fr:"← Retour à l'analyse de couple"};
   document.querySelectorAll('a').forEach(function(a){
     if(a.textContent.trim()==='← Vissza a párkapcsolati elemzéshez'&&backLinks[LANG])a.textContent=backLinks[LANG];
   });
