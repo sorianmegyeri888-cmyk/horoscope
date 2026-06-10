@@ -942,7 +942,10 @@ function startProgress(elId, color) {
   const el=document.getElementById(elId);
   el.style.display='block';
   let pct=0, msgIdx=0;
-  el.innerHTML='<div class="ar-title ar-title-'+elId.slice(-1)+'">Elemzés folyamatban…</div><div class="progress-wrap"><div class="progress-msg" id="pmsg-'+elId+'">'+((window.LOAD_MSGS||LOAD_MSGS)[0]||'...')+'</div><div class="progress-bar-bg"><div class="progress-bar-fill" id="pbar-'+elId+'" style="width:0%;background:linear-gradient(90deg,'+color+'70,'+color+')"></div></div><div class="progress-row"><div class="progress-hint" id="phint-'+elId+'">Ez eltart kb. 10–20 másodpercet</div><div class="progress-pct" id="ppct-'+elId+'" style="color:'+color+'">0%</div></div></div>';
+  var analyzingTxt=T&&T.analyzing?T.analyzing:'Analysis in progress...';
+  var hintTxt=T&&T.analyzing_hint?T.analyzing_hint:'Takes about 10-20 seconds';
+  var msgs=window.LOAD_MSGS||LOAD_MSGS_ALL&&LOAD_MSGS_ALL[LANG]||LOAD_MSGS_ALL&&LOAD_MSGS_ALL['hu']||['...'];
+  el.innerHTML='<div class="ar-title ar-title-'+elId.slice(-1)+'">'+analyzingTxt+'</div><div class="progress-wrap"><div class="progress-msg" id="pmsg-'+elId+'">'+msgs[0]+'</div><div class="progress-bar-bg"><div class="progress-bar-fill" id="pbar-'+elId+'" style="width:0%;background:linear-gradient(90deg,'+color+'70,'+color+')"></div></div><div class="progress-row"><div class="progress-hint" id="phint-'+elId+'">'+hintTxt+'</div><div class="progress-pct" id="ppct-'+elId+'" style="color:'+color+'">0%</div></div></div>';
   el.scrollIntoView({behavior:'smooth',block:'start'});
   const timer=setInterval(()=>{
     if(pct<35)pct+=3;else if(pct<65)pct+=1.5;else if(pct<85)pct+=0.6;else if(pct<93)pct+=0.2;
