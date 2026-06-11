@@ -382,7 +382,7 @@ function showZ(i){
   document.getElementById('zp-em').textContent=a.em;
   document.getElementById('zp-zh').textContent=a.zh;
   document.getElementById('zp-name').textContent=a.n;
-  document.getElementById('zp-el').textContent=a.el+' elem';
+  document.getElementById('zp-el').textContent=a.el+(LANG==='hu'?' elem':' element');
   document.getElementById('zp-desc').textContent=a.desc;
   document.getElementById('zodiac-popup').style.display='block';
 }
