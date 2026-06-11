@@ -197,7 +197,7 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
   </div>
 
   <div class="analysis-panel">
-    <div style="text-align:center;font-size:10px;color:rgba(201,168,76,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Elemzések</div>
+    <div style="text-align:center;font-size:10px;color:rgba(201,168,76,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px" id="analyses-lbl">Elemzések</div>
     <div class="analysis-btns">
       <button class="abtn abtn-p" id="btn-p" onclick="getAnalysis('p')">♀♂ Személyes elemzés</button>
       <button class="abtn abtn-k" id="btn-k" onclick="getAnalysis('k')">💼 Karrier & pénz</button>
@@ -327,6 +327,43 @@ function applyTranslationsE(){
     if(el.children.length===0&&el.textContent.trim()==='Kattints egy állatjegyre a leíráshoz!'&&wheelHints[LANG])el.textContent=wheelHints[LANG];
   });
   // Back link
+  // Repopulate year select with translated names
+  var pyS=document.getElementById('py');
+  if(pyS&&pyS.options.length>1){
+    var curY=pyS.value;
+    while(pyS.options.length>1)pyS.remove(1);
+    var cyE=new Date().getFullYear();
+    for(var yE=cyE;yE>=1924;yE--){
+      var iE=getAi(yE,6);
+      var aNE=A[iE].n;try{if(window.ZA_LANGS_E&&window.ZA_LANGS_E[LANG])aNE=window.ZA_LANGS_E[LANG].names[iE];}catch(e){}
+      var oE=document.createElement('option');oE.value=yE;oE.textContent=yE+' — '+aNE;pyS.appendChild(oE);
+    }
+    pyS.value=curY;
+  }
+  // Repopulate hour select with translated names
+  var phS=document.getElementById('ph');
+  if(phS&&phS.options.length>1){
+    var curH=phS.value;
+    while(phS.options.length>1)phS.remove(1);
+    for(var hE=0;hE<24;hE++){
+      var xE=getHa(hE);var haNE=xE.n;
+      try{if(window.ZA_LANGS_E&&window.ZA_LANGS_E[LANG])haNE=window.ZA_LANGS_E[LANG].names[xE.i];}catch(e){}
+      var ohE=document.createElement('option');ohE.value=hE;ohE.textContent=String(hE).padStart(2,'0')+':00 '+xE.zh+' '+haNE;phS.appendChild(ohE);
+    }
+    phS.value=curH;
+  }
+  // Repopulate month select
+  var pmoS=document.getElementById('pmo');
+  if(pmoS&&T&&T.months){
+    var curMo=pmoS.value;
+    while(pmoS.options.length>1)pmoS.remove(1);
+    T.months.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;pmoS.appendChild(o);});
+    pmoS.value=curMo;
+  }
+  // Analyses label
+  var al=document.getElementById('analyses-lbl');
+  var alt={en:'ANALYSES',de:'ANALYSEN',it:'ANALISI',es:'ANÁLISIS',ro:'ANALIZE',fr:'ANALYSES'};
+  if(al&&alt[LANG])al.textContent=alt[LANG];
   var backLinks={hu:"← Vissza a párkapcsolati elemzéshez",en:"← Back to relationship analysis",de:"← Zurück zur Beziehungsanalyse",it:"← Torna all'analisi di coppia",es:"← Volver al análisis de pareja",ro:"← Înapoi la analiza relației",fr:"← Retour à l'analyse de couple"};
   document.querySelectorAll('a').forEach(function(a){
     if(a.textContent.trim()==='← Vissza a párkapcsolati elemzéshez'&&backLinks[LANG])a.textContent=backLinks[LANG];
