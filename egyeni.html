@@ -158,6 +158,36 @@ footer{margin-top:36px;text-align:center;padding-top:14px;border-top:1px solid r
   </div>
   <div style="text-align:center;font-size:12px;color:rgba(201,168,76,.45);font-style:italic;margin-top:4px">Kattints egy szektorra a leíráshoz</div>
 </div>
+
+<div class="form-box">
+  <div class="form-title">Add meg a születési adataidat</div>
+
+  <div style="display:flex;gap:12px;justify-content:center;margin-bottom:18px">
+    <button onclick="setGender('f')" id="gender-f" style="flex:1;max-width:140px;padding:10px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:3px;cursor:pointer;background:rgba(180,30,80,.2);border:1px solid rgba(196,30,58,.5);color:#F5A0A0">♀ Nő</button>
+    <button onclick="setGender('m')" id="gender-m" style="flex:1;max-width:140px;padding:10px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;border-radius:3px;cursor:pointer;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.25);color:rgba(250,243,224,.5)">♂ Férfi</button>
+  </div>
+
+  <div class="fg"><label class="fl" data-lbl="name">Keresztnév</label><input class="fi" type="text" id="pn" placeholder="pl. Anna"></div>
+  <div class="fg"><label class="fl" data-lbl="year">Születési év</label><select class="fi" id="py" onchange="upd()"><option value="">— Válassz évet —</option></select></div>
+  <div class="row3">
+    <div><label class="fl" data-lbl="month">Hónap</label>
+      <select class="fi" id="pmo" onchange="upd()">
+        <option value="">—</option><option value="1">Január</option><option value="2">Február</option><option value="3">Március</option><option value="4">Április</option><option value="5">Május</option><option value="6">Június</option><option value="7">Július</option><option value="8">Augusztus</option><option value="9">Szeptember</option><option value="10">Október</option><option value="11">November</option><option value="12">December</option>
+      </select>
+    </div>
+    <div><label class="fl" data-lbl="day">Nap</label>
+      <select class="fi" id="pd"><option value="">—</option></select>
+    </div>
+    <div><label class="fl" data-lbl="hour">Óra (Lau)</label>
+      <select class="fi" id="ph" onchange="upd()"><option value="">—</option></select>
+    </div>
+  </div>
+  <div class="preview" id="pprev">Add meg az adataidat…</div>
+
+  <button class="calc-btn" onclick="calc()">🌙 Megnézem a sorsomat</button>
+  <div class="error-msg" id="errmsg"></div>
+</div>
+
 <div id="result">
   <div class="score-card">
     <div style="font-size:32px;margin-bottom:6px" id="res-em"></div>
