@@ -312,20 +312,45 @@ function addLangSwitcherE(){
   document.body.appendChild(btn);
 }
 
-var ZA=[
-  {n:"Patkány",zh:"鼠",em:"🐀",el:"Víz",color:"#2a5a9e",border:"#6a9ad5",desc:"Okos, leleményes és karizmatikus. Mindig megtalálja az utat. Éles megfigyelő — pontosan érzékeli mások szándékait. Valódi érzéseit csak kevesek előtt tárja fel."},
-  {n:"Bika",zh:"牛",em:"🐂",el:"Föld",color:"#3a6a2a",border:"#7ab85a",desc:"Megbízható, türelmes és rendíthetetlen. Ha belefog valamibe, végigcsinálja. Stabilitása másokban mély bizalmat ébreszt — erre a jegyre mindig lehet számítani."},
-  {n:"Tigris",zh:"虎",em:"🐅",el:"Fa",color:"#7a4a1a",border:"#c08040",desc:"Bátor, szenvedélyes, természetes tekintéllyel rendelkezik. Nemes szívű és igazságszerető — impulzív döntései sokszor zseniálisak."},
-  {n:"Nyúl",zh:"兔",em:"🐇",el:"Fa",color:"#5a2a7a",border:"#aa6aba",desc:"Finom, érzékeny és diplomatikus. Kivételesen fogékony mások érzelmeire. Esztétikai érzéke párját ritkítja — szépséget lát ott, ahol mások nem."},
-  {n:"Sárkány",zh:"龍",em:"🐉",el:"Föld",color:"#8a1a1a",border:"#d04040",desc:"A legszerencsésebb jegy! Ragyogó karizma és határtalan energia — arra született, hogy vezessen. Az egyetlen mitikus állat a 12 jegy között."},
-  {n:"Kígyó",zh:"蛇",em:"🐍",el:"Tűz",color:"#1a5a5a",border:"#4aaaa0",desc:"Bölcs, mély és intuitív. Pontosan érzékeli mások motivációit. Csendes megfigyelő — belső gazdagsága végtelen, de csak kevesek előtt tárja fel."},
-  {n:"Ló",zh:"馬",em:"🐎",el:"Tűz",color:"#6a3a1a",border:"#ba6a3a",desc:"Szabad, energikus és optimista. Végtelen energiával rendelkezik — egyetlen dolog fojtogatja: a bezártság. A kaland az otthona."},
-  {n:"Kecske",zh:"羊",em:"🐐",el:"Föld",color:"#2a4a7a",border:"#5a7aba",desc:"Alkotó, empatikus és érzékeny. Mélyen átérzi mások fájdalmát és örömét. Természetes művészlélek — szépséget lát ott, ahol mások nem."},
-  {n:"Majom",zh:"猴",em:"🐒",el:"Fém",color:"#3a5a2a",border:"#7a9a5a",desc:"Szellemes, sokoldalú és leleményes. Villámgyorsan gondolkodik — komoly célokat követ a vidám külső mögött."},
-  {n:"Kakas",zh:"雞",em:"🐓",el:"Fém",color:"#6a5a1a",border:"#ba9a3a",desc:"Precíz, becsületes és önbizalmas. Perfekcionista természete miatt mindig a részletekre figyel. Egyenes szókimondó — amit gondol, kimondja."},
-  {n:"Kutya",zh:"狗",em:"🐕",el:"Föld",color:"#4a2a6a",border:"#8a5aaa",desc:"Hűséges, igazságos és védelmező. Soha nem árulja el elveit — feltétel nélkül számítani lehet rá. A leghűségesebb szövetséges."},
-  {n:"Disznó",zh:"豬",em:"🐷",el:"Víz",color:"#2a4a6a",border:"#5a8aaa",desc:"Nagylelkű, derűs és becsületes. Nyílt szívű optimizmussal közelít az élethez — igazi boldogsága mások boldogításában rejlik."},
+var ZA_HU_E=[
+  {n:"Patkány",el:"Víz",desc:"Okos, leleményes és karizmatikus. Mindig megtalálja az utat."},
+  {n:"Bika",el:"Föld",desc:"Megbízható, türelmes és rendíthetetlen."},
+  {n:"Tigris",el:"Fa",desc:"Bátor, szenvedélyes, természetes tekintéllyel."},
+  {n:"Nyúl",el:"Fa",desc:"Finom, érzékeny és diplomatikus."},
+  {n:"Sárkány",el:"Föld",desc:"A legszerencsésebb jegy! Ragyogó karizma."},
+  {n:"Kígyó",el:"Tűz",desc:"Bölcs, mély és intuitív."},
+  {n:"Ló",el:"Tűz",desc:"Szabad, energikus és optimista."},
+  {n:"Kecske",el:"Föld",desc:"Alkotó, empatikus és érzékeny."},
+  {n:"Majom",el:"Fém",desc:"Szellemes, sokoldalú és leleményes."},
+  {n:"Kakas",el:"Fém",desc:"Precíz, becsületes és önbizalmas."},
+  {n:"Kutya",el:"Föld",desc:"Hűséges, igazságos és védelmező."},
+  {n:"Disznó",el:"Víz",desc:"Nagylelkű, derűs és becsületes."},
 ];
+var ZA_LANGS_E={
+  en:{names:["Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Goat","Monkey","Rooster","Dog","Pig"],el:["Water","Earth","Wood","Wood","Earth","Fire","Fire","Earth","Metal","Metal","Earth","Water"],descs:["Smart, resourceful and charismatic. Always finds a way.","Reliable, patient and steadfast.","Brave, passionate, with natural authority.","Refined, sensitive and diplomatic.","The luckiest sign! Radiant charisma.","Wise, deep and intuitive.","Free, energetic and optimistic.","Creative, empathetic and sensitive.","Witty, versatile and resourceful.","Precise, honest and self-confident.","Loyal, just and protective.","Generous, cheerful and honest."]},
+  de:{names:["Ratte","Ochse","Tiger","Hase","Drache","Schlange","Pferd","Ziege","Affe","Hahn","Hund","Schwein"],el:["Wasser","Erde","Holz","Holz","Erde","Feuer","Feuer","Erde","Metall","Metall","Erde","Wasser"],descs:["Klug und charismatisch.","Zuverlässig und geduldig.","Mutig und leidenschaftlich.","Verfeinert und sensibel.","Das glücklichste Zeichen!","Weise und intuitiv.","Frei und energetisch.","Kreativ und empathisch.","Witzig und vielseitig.","Präzise und ehrlich.","Loyal und gerecht.","Großzügig und fröhlich."]},
+  it:{names:["Ratto","Bue","Tigre","Coniglio","Drago","Serpente","Cavallo","Capra","Scimmia","Gallo","Cane","Maiale"],el:["Acqua","Terra","Legno","Legno","Terra","Fuoco","Fuoco","Terra","Metallo","Metallo","Terra","Acqua"],descs:["Intelligente e carismatico.","Affidabile e paziente.","Coraggioso e appassionato.","Raffinato e sensibile.","Il segno più fortunato!","Saggio e intuitivo.","Libero ed energico.","Creativo ed empatico.","Spiritoso e versatile.","Preciso e onesto.","Leale e giusto.","Generoso e allegro."]},
+  es:{names:["Rata","Buey","Tigre","Conejo","Dragón","Serpiente","Caballo","Cabra","Mono","Gallo","Perro","Cerdo"],el:["Agua","Tierra","Madera","Madera","Tierra","Fuego","Fuego","Tierra","Metal","Metal","Tierra","Agua"],descs:["Inteligente y carismático.","Confiable y paciente.","Valiente y apasionado.","Refinado y sensible.","El signo más afortunado!","Sabio e intuitivo.","Libre y enérgico.","Creativo y empático.","Ingenioso y versátil.","Preciso y honesto.","Leal y justo.","Generoso y alegre."]},
+  ro:{names:["Șobolan","Bou","Tigru","Iepure","Dragon","Șarpe","Cal","Capră","Maimuță","Cocoș","Câine","Porc"],el:["Apă","Pământ","Lemn","Lemn","Pământ","Foc","Foc","Pământ","Metal","Metal","Pământ","Apă"],descs:["Inteligent și carismatic.","De încredere și răbdător.","Curajos și pasionat.","Rafinat și sensibil.","Cel mai norocos semn!","Înțelept și intuitiv.","Liber și energic.","Creativ și empatic.","Spiritual și versatil.","Precis și onest.","Loial și drept.","Generos și vesel."]},
+  fr:{names:["Rat","Bœuf","Tigre","Lapin","Dragon","Serpent","Cheval","Chèvre","Singe","Coq","Chien","Cochon"],el:["Eau","Terre","Bois","Bois","Terre","Feu","Feu","Terre","Métal","Métal","Terre","Eau"],descs:["Intelligent et charismatique.","Fiable et patient.","Courageux et passionné.","Raffiné et sensible.","Le signe le plus chanceux!","Sage et intuitif.","Libre et énergique.","Créatif et empathique.","Spirituel et polyvalent.","Précis et honnête.","Loyal et juste.","Généreux et joyeux."]},
+};
+(function(){
+var _zl=typeof LANG!=='undefined'&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG]:null;
+var ZA_DATA_E=_zl||null;
+})();
+var ZA=[  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[0]:"Patkány"),zh:"鼠",em:"🐀",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[0]:"Víz"),sc:"#2a5a9e",bc:"#6a9ad5",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[0]:"Okos, leleményes és karizmatikus. Mindig megtalálja az utat.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[1]:"Bika"),zh:"牛",em:"🐂",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[1]:"Föld"),sc:"#3a6a2a",bc:"#7ab85a",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[1]:"Megbízható, türelmes és rendíthetetlen.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[2]:"Tigris"),zh:"虎",em:"🐅",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[2]:"Fa"),sc:"#7a4a1a",bc:"#c08040",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[2]:"Bátor, szenvedélyes, természetes tekintéllyel.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[3]:"Nyúl"),zh:"兔",em:"🐇",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[3]:"Fa"),sc:"#5a2a7a",bc:"#aa6aba",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[3]:"Finom, érzékeny és diplomatikus.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[4]:"Sárkány"),zh:"龍",em:"🐉",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[4]:"Föld"),sc:"#8a1a1a",bc:"#d04040",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[4]:"A legszerencsésebb jegy! Ragyogó karizma.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[5]:"Kígyó"),zh:"蛇",em:"🐍",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[5]:"Tűz"),sc:"#1a5a5a",bc:"#4aaaa0",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[5]:"Bölcs, mély és intuitív.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[6]:"Ló"),zh:"馬",em:"🐎",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[6]:"Tűz"),sc:"#6a3a1a",bc:"#ba6a3a",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[6]:"Szabad, energikus és optimista.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[7]:"Kecske"),zh:"羊",em:"🐐",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[7]:"Föld"),sc:"#2a4a7a",bc:"#5a7aba",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[7]:"Alkotó, empatikus és érzékeny.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[8]:"Majom"),zh:"猴",em:"🐒",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[8]:"Fém"),sc:"#3a5a2a",bc:"#7a9a5a",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[8]:"Szellemes, sokoldalú és leleményes.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[9]:"Kakas"),zh:"雞",em:"🐓",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[9]:"Fém"),sc:"#6a5a1a",bc:"#ba9a3a",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[9]:"Precíz, becsületes és önbizalmas.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[10]:"Kutya"),zh:"狗",em:"🐕",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[10]:"Föld"),sc:"#4a2a6a",bc:"#8a5aaa",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[10]:"Hűséges, igazságos és védelmező.")},
+  {n:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].names[11]:"Disznó"),zh:"豬",em:"🐷",el:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].el[11]:"Víz"),sc:"#c03070",bc:"#e05090",desc:(typeof LANG!="undefined"&&ZA_LANGS_E[LANG]?ZA_LANGS_E[LANG].descs[11]:"Nagylelkű, derűs és becsületes.")}
+]
 var svg=document.getElementById('zodiac-wheel');
 var cx=260,cy=260,outerR=252,innerR=94;
 var step=Math.PI*2/12;
